@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4fbd77f93e11f4193f9c08d9ebbc3f, type: 3}
   m_Name: RobotStats
   m_EditorClassIdentifier: 
-  _class: 2
+  _Type: 2
   _HealthBase: 500
   _MovementSpeedBase: 10
   _HitRangeBase: 1
-  _AttackSpeedBase: 0
+  _AttackSpeedBase: 1
   _DamageBase: 1
