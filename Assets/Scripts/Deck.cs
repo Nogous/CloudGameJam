@@ -36,13 +36,26 @@ public class Deck
         for (int i = 0; i < 100; i++)
         {
             cards.Add(new Card());
-            if (Random.Range(0,2)==0)
+            switch (Random.Range(0, 6))
             {
-                cards[i] = Card.Shild;
-            }
-            else
-            {
-                cards[i] = Card.Giant;
+                case 0:
+                    cards[i] = Card.Shild;
+                    break;
+                case 1:
+                    cards[i] = Card.Bomb;
+                    break;
+                case 2:
+                    cards[i] = Card.Giant;
+                    break;
+                case 3:
+                    cards[i] = Card.Jump;
+                    break;
+                case 4:
+                    cards[i] = Card.Laser;
+                    break;
+                case 5:
+                    cards[i] = Card.Speed;
+                    break;
             }
         }
     }
