@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
     {
         switch (type)
         {
-            case Card.Shild:
+            case Card.Shield:
                 return Resources.Load<Sprite>("Sprites/Armor");
             case Card.Bomb:
                 return Resources.Load<Sprite>("Sprites/Bomb");
@@ -129,21 +129,21 @@ public class GameManager : MonoBehaviour
         {
             switch (item)
             {
-                case Card.Shild:
-                    tmpRobot._SetTank = true;
+                case Card.Shield:
+                    tmpRobot._BonusPlayer1 = tmpRobot.gameObject.AddComponent<Bonus_Tank>();
                     break;
                 case Card.Bomb:
                     break;
                 case Card.Giant:
-                    tmpRobot._SetGiant = true;
+                    tmpRobot._BonusPlayer1 = tmpRobot.gameObject.AddComponent<Bonus_Giant>();
                     break;
                 case Card.Jump:
                     break;
                 case Card.Laser:
-                    tmpRobot._SetMirror = true;
+                    tmpRobot._BonusPlayer1 = tmpRobot.gameObject.AddComponent<Bonus_Mirror>();
                     break;
                 case Card.Speed:
-                    tmpRobot._SetFaster = true;
+                    tmpRobot._BonusPlayer1 = tmpRobot.gameObject.AddComponent<Bonus_Faster>();
                     break;
                 default:
                     break;

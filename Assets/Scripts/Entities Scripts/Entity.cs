@@ -9,11 +9,11 @@ public class Entity : MonoBehaviour
 
     [Header("Current Stats")]
     //Stats Actual on this Entity
-    [SerializeField] [ReadOnly] private int _CurrentHealth = 0;
-    [SerializeField] [ReadOnly] private int _CurrentDamage = 0;
-    [SerializeField] [ReadOnly] private float _CurrentMovementSpeed = 0;
-    [SerializeField] [ReadOnly] private float _CurrentAttackSpeed = 0;
-    [SerializeField] [ReadOnly] private int _CurrentHitRange = 0;
+    [ReadOnly] public int _CurrentHealth = 0;
+    [ReadOnly] public int _CurrentDamage = 0;
+    [ReadOnly] public float _CurrentMovementSpeed = 0;
+    [ReadOnly] public float _CurrentAttackSpeed = 0;
+    [ReadOnly] public int _CurrentHitRange = 0;
 
     [Header("Path factory to Nexus")]
     public List<GameObject> _WalkingPath;
@@ -31,10 +31,10 @@ public class Entity : MonoBehaviour
     Vector3 _CurrentNextPositionPath;
 
     [Header("Robot Bonus Bool")]
-    public bool _SetGiant;
-    public bool _SetFaster;
-    public bool _SetTank;
-    public bool _SetMirror;
+    public Bonus _BonusPlayer1;
+    public Bonus _BonusPlayer2;
+    public Bonus _BonusPlayer3;
+    public Bonus _BonusPlayer4;
 
     private void Awake()
     {
@@ -55,9 +55,6 @@ public class Entity : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (_SetGiant)
-            SetGiant();
-
         if (_WalkingPath.Count != 0)
             CheckPath();
     }
@@ -69,20 +66,12 @@ public class Entity : MonoBehaviour
         Movement();
     }
 
-    private void SetGiant()
-    {
-        _SetGiant = true;
-        _CurrentHealth = _CurrentHealth * 2;
-        this.gameObject.transform.localScale = this.gameObject.transform.localScale * 2;
-    }
-
     void Attack()
     {
         if (_EnnemyEntities.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Tour)
         {
             if (_EnnemyEntities[0]._CurrentHealth <= 0)
             {
-                //_EnnemyEntities[0].Death();
                 _EnnemyEntities.Remove(_EnnemyEntities[0]);
             }
 
@@ -102,8 +91,6 @@ public class Entity : MonoBehaviour
                 {
                     _EnnemyEntities.Remove(_EnnemyEntities[0]);
                 }
-
-                //_EnnemyEntities[0]._CurrentHealth -= this._CurrentDamage;
 
             }
         }
@@ -129,10 +116,9 @@ public class Entity : MonoBehaviour
     {
         if (_CurrentMovementSpeed > 0 && _WalkingPath.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Robot)
         {
-            if (_SetFaster) { _CurrentPos += Time.deltaTime * (_CurrentMovementSpeed * 2) / Vector3.Distance(_StartPosition, _CurrentNextPositionPath); }
-            else { _CurrentPos += Time.deltaTime * _CurrentMovementSpeed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath); }
+            _CurrentPos += Time.deltaTime * _CurrentMovementSpeed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
 
-            if(this.transform.position != _CurrentNextPositionPath)
+            if (this.transform.position != _CurrentNextPositionPath)
             {
                 this.transform.position = Vector3.Lerp(_StartPosition, _CurrentNextPositionPath, _CurrentPos < 1 ? _AnimCurve.Evaluate(_CurrentPos) : _CurrentPos);
             }
@@ -144,8 +130,6 @@ public class Entity : MonoBehaviour
                     CheckPath();
                 }
             }
-
-            //Mathf.Lerp(_WalkingPath[0].transform.position.magnitude, _WalkingPath[0 + 1].transform.position.magnitude, Time.deltaTime);
         }
     }
 
