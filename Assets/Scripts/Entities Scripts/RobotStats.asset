@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RobotStats
   m_EditorClassIdentifier: 
   _Type: 2
-  _HealthBase: 500
+  _HealthBase: 460
   _MovementSpeedBase: 1
   _HitRangeBase: 0
   _AttackSpeedBase: 1

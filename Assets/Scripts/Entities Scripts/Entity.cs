@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    [SerializeField][Expandable]
-    private EntitiesStats entitiesStats;
+    [Expandable]
+    public EntitiesStats entitiesStats;
 
+    [Header("Current Stats")]
     //Stats Actual on this Entity
-    private int _CurrentHealth;
-    private int _CurrentDamage;
-    private int _CurrentMovementSpeed;
-    private int _CurrentAttackSpeed;
-    private int _CurrentHitRange;
+    [SerializeField] [ReadOnly] private int _CurrentHealth = 0;
+    [SerializeField] [ReadOnly] private int _CurrentDamage = 0;
+    [SerializeField] [ReadOnly] private int _CurrentMovementSpeed = 0;
+    [SerializeField] [ReadOnly] private int _CurrentAttackSpeed = 0;
+    [SerializeField] [ReadOnly] private int _CurrentHitRange = 0;
 
     [Header("Path factory to Nexus")]
     public List<GameObject> _WalkingPath;
@@ -20,6 +21,7 @@ public class Entity : MonoBehaviour
 
     [Header("Ennemy to Attack")]
     public List<Entity> _EnnemyEntities;
+    public GameObject _BulletPrefab;
 
     private float _CooldownHit = 0;
     private float _CurrentPos = 0;
@@ -28,19 +30,36 @@ public class Entity : MonoBehaviour
     Vector3 _StartPosition;
     Vector3 _CurrentNextPositionPath;
 
+    [Header("Robot Bonus Bool")]
+    public bool _SetGiant;
+    public bool _SetFaster;
+    public bool _SetTank;
+    public bool _SetMirror;
+
     private void Awake()
     {
         _CurrentHealth = entitiesStats._HealthBase ;
         _CurrentDamage = entitiesStats._DamageBase ;
         _CurrentMovementSpeed = entitiesStats._MovementSpeedBase;
         _CurrentAttackSpeed = entitiesStats._AttackSpeedBase;
-        _CurrentHitRange = entitiesStats._HitRangeBase;
+        if (this.gameObject.GetComponent<SphereCollider>() != null)
+        {
+            if (entitiesStats._HitRangeBase != this.gameObject.GetComponent<SphereCollider>().radius)
+            {
+                this.gameObject.GetComponent<SphereCollider>().radius = (float)entitiesStats._HitRangeBase;
+                _CurrentHitRange = entitiesStats._HitRangeBase;
+            }
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        CheckPath();
+        if (_SetGiant)
+            SetGiant();
+
+        if (_WalkingPath.Count != 0)
+            CheckPath();
     }
 
     // Update is called once per frame
@@ -50,10 +69,23 @@ public class Entity : MonoBehaviour
         Movement();
     }
 
+   public void SetGiant()
+    {
+        _SetGiant = true;
+        _CurrentHealth = _CurrentHealth * 2;
+        this.gameObject.transform.localScale = this.gameObject.transform.localScale * 2;
+    }
+
     void Attack()
     {
-        if (_EnnemyEntities != null)
+        if (_EnnemyEntities.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Tour)
         {
+            if (_EnnemyEntities[0]._CurrentHealth <= 0)
+            {
+                //_EnnemyEntities[0].Death();
+                _EnnemyEntities.Remove(_EnnemyEntities[0]);
+            }
+
             if (_CooldownHit > 0)
             {
                 _CooldownHit -= Time.deltaTime;
@@ -61,12 +93,28 @@ public class Entity : MonoBehaviour
             else
             {
                 _CooldownHit = _CurrentAttackSpeed;
-                foreach (Entity entity in _EnnemyEntities)
+
+                GameObject go = Instantiate(_BulletPrefab, this.gameObject.transform.position, Quaternion.identity);
+                go.name = _BulletPrefab.name;
+                go.GetComponent<Bullet>().SetDefaultVariable(_CurrentDamage, _EnnemyEntities[0].gameObject, _CurrentAttackSpeed);
+
+                if (_EnnemyEntities[0]._CurrentHealth -_CurrentDamage <= 0)
                 {
-                    entity._CurrentHealth -= this._CurrentDamage;
-                    if(entity._CurrentHealth <= 0) { entity.Death(); }
+                    _EnnemyEntities.Remove(_EnnemyEntities[0]);
                 }
+
+                //_EnnemyEntities[0]._CurrentHealth -= this._CurrentDamage;
+
             }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        this._CurrentHealth -= damage;
+        if (_CurrentHealth <= 0)
+        {
+            Death();
         }
     }
 
@@ -79,9 +127,10 @@ public class Entity : MonoBehaviour
 
     void Movement()
     {
-        if (_CurrentMovementSpeed > 0 && _WalkingPath != null)
+        if (_CurrentMovementSpeed > 0 && _WalkingPath.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Robot)
         {
-            _CurrentPos += Time.deltaTime * _CurrentMovementSpeed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
+            if (_SetFaster) { _CurrentPos += Time.deltaTime * (_CurrentMovementSpeed * 2) / Vector3.Distance(_StartPosition, _CurrentNextPositionPath); }
+            else { _CurrentPos += Time.deltaTime * _CurrentMovementSpeed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath); }
 
             if(this.transform.position != _CurrentNextPositionPath)
             {
