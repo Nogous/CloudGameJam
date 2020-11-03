@@ -11,8 +11,8 @@ public class Entity : MonoBehaviour
     //Stats Actual on this Entity
     [SerializeField] [ReadOnly] private int _CurrentHealth = 0;
     [SerializeField] [ReadOnly] private int _CurrentDamage = 0;
-    [SerializeField] [ReadOnly] private int _CurrentMovementSpeed = 0;
-    [SerializeField] [ReadOnly] private int _CurrentAttackSpeed = 0;
+    [SerializeField] [ReadOnly] private float _CurrentMovementSpeed = 0;
+    [SerializeField] [ReadOnly] private float _CurrentAttackSpeed = 0;
     [SerializeField] [ReadOnly] private int _CurrentHitRange = 0;
 
     [Header("Path factory to Nexus")]
@@ -69,7 +69,7 @@ public class Entity : MonoBehaviour
         Movement();
     }
 
-   private void SetGiant()
+    private void SetGiant()
     {
         _SetGiant = true;
         _CurrentHealth = _CurrentHealth * 2;

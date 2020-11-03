@@ -18,11 +18,11 @@ public class EntitiesStats : ScriptableObject
     [Header("Stats")]
     public int _HealthBase;
     [Space(5)]
-    public int _MovementSpeedBase;
+    public float _MovementSpeedBase;
     [Space(5)]
     public int _HitRangeBase;
     [Space(5)]
-    public int _AttackSpeedBase;
+    public float _AttackSpeedBase;
     [Space(5)]
     public int _DamageBase;
 }
