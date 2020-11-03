@@ -406,10 +406,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 0}
-  _SetGiant: 1
-  _SetFaster: 0
-  _SetTank: 0
-  _SetMirror: 0
+  _BonusPlayer1: {fileID: 0}
+  _BonusPlayer2: {fileID: 0}
+  _BonusPlayer3: {fileID: 0}
+  _BonusPlayer4: {fileID: 0}
 --- !u!54 &49345400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1170,10 +1170,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 0}
-  _SetGiant: 0
-  _SetFaster: 0
-  _SetTank: 1
-  _SetMirror: 0
+  _BonusPlayer1: {fileID: 0}
+  _BonusPlayer2: {fileID: 0}
+  _BonusPlayer3: {fileID: 0}
+  _BonusPlayer4: {fileID: 0}
 --- !u!65 &1010575980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1565,9 +1565,57 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
       propertyPath: robotFactoryPos
       value: 
       objectReference: {fileID: 1515928317}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[0]
+      value: 
+      objectReference: {fileID: 1512504509}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[1]
+      value: 
+      objectReference: {fileID: 629368124}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[2]
+      value: 
+      objectReference: {fileID: 1369726414}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[3]
+      value: 
+      objectReference: {fileID: 573093046}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[4]
+      value: 
+      objectReference: {fileID: 139067220}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[5]
+      value: 
+      objectReference: {fileID: 1622074528}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[6]
+      value: 
+      objectReference: {fileID: 10900876}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[7]
+      value: 
+      objectReference: {fileID: 862380779}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[8]
+      value: 
+      objectReference: {fileID: 618367520}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[9]
+      value: 
+      objectReference: {fileID: 806970406}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: path.Array.data[10]
+      value: 
+      objectReference: {fileID: 430468593}
     - target: {fileID: 1712732570202822920, guid: b293c60de28b8864a893c55a6ab0a2e0,
         type: 3}
       propertyPath: m_Name
@@ -1803,10 +1851,10 @@ MonoBehaviour:
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 6694740371106907897, guid: 507bf1b9cb0ccec4ab3d719b702130fc,
     type: 3}
-  _SetGiant: 0
-  _SetFaster: 0
-  _SetTank: 0
-  _SetMirror: 0
+  _BonusPlayer1: {fileID: 0}
+  _BonusPlayer2: {fileID: 0}
+  _BonusPlayer3: {fileID: 0}
+  _BonusPlayer4: {fileID: 0}
 --- !u!135 &1771298197
 SphereCollider:
   m_ObjectHideFlags: 0
