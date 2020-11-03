@@ -160,9 +160,16 @@ public class Entity : MonoBehaviour
         {
             if(other.gameObject.GetComponent<Entity>().entitiesStats._Type == EntitiesStats.Type.Robot)
             {
-                if (!_EnnemyEntities.Contains(other.gameObject.GetComponent<Entity>()))
+                if (this.entitiesStats._Type == EntitiesStats.Type.Tour)
                 {
-                    _EnnemyEntities.Add(other.gameObject.GetComponent<Entity>());
+                    if (!_EnnemyEntities.Contains(other.gameObject.GetComponent<Entity>()))
+                    {
+                        _EnnemyEntities.Add(other.gameObject.GetComponent<Entity>());
+                    }
+                }
+                else if(this.entitiesStats._Type == EntitiesStats.Type.Nexus)
+                {
+                    Debug.Log("Victory ! You destroy Nexus.");
                 }
             }
         }
