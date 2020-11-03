@@ -31,7 +31,7 @@ public class Entity : MonoBehaviour
     Vector3 _CurrentNextPositionPath;
 
     [Header("Robot Bonus Bool")]
-    public Bonus[] _BonusPlayer = new Bonus[4];
+    [ReadOnly] public Bonus[] _BonusPlayer = new Bonus[4];
 
     private void Awake()
     {
