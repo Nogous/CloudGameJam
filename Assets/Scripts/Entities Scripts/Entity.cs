@@ -16,25 +16,31 @@ public class Entity : MonoBehaviour
 
     [Header("Path factory to Nexus")]
     public List<GameObject> _WalkingPath;
+    public AnimationCurve _AnimCurve;
 
     [Header("Ennemy to Attack")]
     public List<Entity> _EnnemyEntities;
 
-    private float cooldownHit = 0;
+    private float _CooldownHit = 0;
+    private float _CurrentPos = 0;
+    private int _CurrentObjectID = 0;
+
+    Vector3 _StartPosition;
+    Vector3 _CurrentNextPositionPath;
 
     private void Awake()
     {
-        entitiesStats._HealthBase = _CurrentHealth;
-        entitiesStats._DamageBase = _CurrentDamage;
-        entitiesStats._MovementSpeedBase = _CurrentMovementSpeed;
-        entitiesStats._AttackSpeedBase = _CurrentAttackSpeed;
-        entitiesStats._HitRangeBase = _CurrentHitRange;
+        _CurrentHealth = entitiesStats._HealthBase ;
+        _CurrentDamage = entitiesStats._DamageBase ;
+        _CurrentMovementSpeed = entitiesStats._MovementSpeedBase;
+        _CurrentAttackSpeed = entitiesStats._AttackSpeedBase;
+        _CurrentHitRange = entitiesStats._HitRangeBase;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        CheckPath();
     }
 
     // Update is called once per frame
@@ -48,13 +54,13 @@ public class Entity : MonoBehaviour
     {
         if (_EnnemyEntities != null)
         {
-            if (cooldownHit > 0)
+            if (_CooldownHit > 0)
             {
-                cooldownHit -= Time.deltaTime;
+                _CooldownHit -= Time.deltaTime;
             }
             else
             {
-                cooldownHit = _CurrentAttackSpeed;
+                _CooldownHit = _CurrentAttackSpeed;
                 foreach (Entity entity in _EnnemyEntities)
                 {
                     entity._CurrentHealth -= this._CurrentDamage;
@@ -64,10 +70,32 @@ public class Entity : MonoBehaviour
         }
     }
 
+    void CheckPath()
+    {
+        _CurrentPos = 0;
+        _StartPosition = this.transform.position;
+        _CurrentNextPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
+    }
+
     void Movement()
     {
         if (_CurrentMovementSpeed > 0 && _WalkingPath != null)
         {
+            _CurrentPos += Time.deltaTime * _CurrentMovementSpeed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
+
+            if(this.transform.position != _CurrentNextPositionPath)
+            {
+                this.transform.position = Vector3.Lerp(_StartPosition, _CurrentNextPositionPath, _CurrentPos < 1 ? _AnimCurve.Evaluate(_CurrentPos) : _CurrentPos);
+            }
+            else
+            {
+                if(_CurrentObjectID < _WalkingPath.Count - 1)
+                {
+                    _CurrentObjectID++;
+                    CheckPath();
+                }
+            }
+
             //Mathf.Lerp(_WalkingPath[0].transform.position.magnitude, _WalkingPath[0 + 1].transform.position.magnitude, Time.deltaTime);
         }
     }
