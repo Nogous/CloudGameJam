@@ -406,10 +406,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 0}
-  _SetGiant: 1
-  _SetFaster: 0
-  _SetTank: 0
-  _SetMirror: 0
+  _BonusPlayer1: {fileID: 0}
+  _BonusPlayer2: {fileID: 0}
+  _BonusPlayer3: {fileID: 0}
+  _BonusPlayer4: {fileID: 0}
 --- !u!54 &49345400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1170,10 +1170,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 0}
-  _SetGiant: 0
-  _SetFaster: 0
-  _SetTank: 1
-  _SetMirror: 0
+  _BonusPlayer1: {fileID: 0}
+  _BonusPlayer2: {fileID: 0}
+  _BonusPlayer3: {fileID: 0}
+  _BonusPlayer4: {fileID: 0}
 --- !u!65 &1010575980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1851,10 +1851,10 @@ MonoBehaviour:
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 6694740371106907897, guid: 507bf1b9cb0ccec4ab3d719b702130fc,
     type: 3}
-  _SetGiant: 0
-  _SetFaster: 0
-  _SetTank: 0
-  _SetMirror: 0
+  _BonusPlayer1: {fileID: 0}
+  _BonusPlayer2: {fileID: 0}
+  _BonusPlayer3: {fileID: 0}
+  _BonusPlayer4: {fileID: 0}
 --- !u!135 &1771298197
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     private bool[] playerChois;
     private List<Card> useCards = new List<Card>();
 
-    // path 
+    // path
     public List<GameObject> path;
 
     private void Awake()
