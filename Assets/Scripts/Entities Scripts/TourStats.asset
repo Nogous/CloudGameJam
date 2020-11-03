@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef4fbd77f93e11f4193f9c08d9ebbc3f, type: 3}
-  m_Name: NexusStats
+  m_Name: TourStats
   m_EditorClassIdentifier: 
-  _class: 3
-  _HealthBase: 1
+  _Type: 1
+  _HealthBase: 100
   _MovementSpeedBase: 0
-  _HitRangeBase: 0
-  _AttackSpeedBase: 0
-  _DamageBase: 0
+  _HitRangeBase: 50
+  _AttackSpeedBase: 1
+  _DamageBase: 10
