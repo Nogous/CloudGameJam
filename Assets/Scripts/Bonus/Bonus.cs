@@ -17,12 +17,12 @@ public class Bonus : MonoBehaviour
 
     public bool isActif;
 
-    public int _Multiplier;
+    public int _Multiplier = 2;
 
     public bool _IsCooldownNeeded;
 
     protected float cooldown;
-    public float cooldownMax;
+    public float cooldownMax = 10f;
 
     protected virtual void Start()
     {
