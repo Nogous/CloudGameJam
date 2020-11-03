@@ -77,7 +77,7 @@ public class Deck
         {
             if (discard.Count == 0)
             {
-                Debug.LogError("No mor card on the deck");
+                Debug.LogError("No more card on the deck");
                 return Card.Shield;
             }
 

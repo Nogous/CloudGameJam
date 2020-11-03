@@ -50,24 +50,24 @@ public class Bullet : MonoBehaviour
             {
                 if (bulletType == BulletType.Classic)
                 {
-                    if (_Entity._BonusPlayer1 != null)
+                    if (_Entity._BonusPlayer[0] != null)
                     {
-                        if (_Entity._BonusPlayer1.type == BonusType.Tank && _Entity._BonusPlayer1.isActif)
+                        if (_Entity._BonusPlayer[0].type == BonusType.Tank && _Entity._BonusPlayer[0].isActif)
                             _Multiplier = _Multiplier * 2;
                     }
-                    if (_Entity._BonusPlayer2 != null)
+                    if (_Entity._BonusPlayer[1] != null)
                     {
-                        if (_Entity._BonusPlayer2.type == BonusType.Tank && _Entity._BonusPlayer2.isActif)
+                        if (_Entity._BonusPlayer[1].type == BonusType.Tank && _Entity._BonusPlayer[1].isActif)
                             _Multiplier = _Multiplier * 2;
                     }
-                    if (_Entity._BonusPlayer3 != null)
+                    if (_Entity._BonusPlayer[2] != null)
                     {
-                        if (_Entity._BonusPlayer3.type == BonusType.Tank && _Entity._BonusPlayer3.isActif)
+                        if (_Entity._BonusPlayer[2].type == BonusType.Tank && _Entity._BonusPlayer[2].isActif)
                             _Multiplier = _Multiplier * 2;
                     }
-                    if (_Entity._BonusPlayer4 != null)
+                    if (_Entity._BonusPlayer[3] != null)
                     {
-                        if (_Entity._BonusPlayer4.type == BonusType.Tank && _Entity._BonusPlayer4.isActif)
+                        if (_Entity._BonusPlayer[3].type == BonusType.Tank && _Entity._BonusPlayer[3].isActif)
                             _Multiplier = _Multiplier * 2;
                     }
 
@@ -79,33 +79,33 @@ public class Bullet : MonoBehaviour
                 }
                 else if (bulletType == BulletType.Laser)
                 {
-                    if (_Entity._BonusPlayer1 != null)
+                    if (_Entity._BonusPlayer[0] != null)
                     {
-                        if (_Entity._BonusPlayer1.type == BonusType.Mirror && _Entity._BonusPlayer1.isActif)
+                        if (_Entity._BonusPlayer[0].type == BonusType.Mirror && _Entity._BonusPlayer[0].isActif)
                         {
                             Destroy(this.gameObject, 0.1f);
                             return;
                         }
                     }
-                    if (_Entity._BonusPlayer2 != null)
+                    if (_Entity._BonusPlayer[1] != null)
                     {
-                        if (_Entity._BonusPlayer2.type == BonusType.Mirror && _Entity._BonusPlayer2.isActif)
+                        if (_Entity._BonusPlayer[1].type == BonusType.Mirror && _Entity._BonusPlayer[1].isActif)
                         {
                             Destroy(this.gameObject, 0.1f);
                             return;
                         }
                     }
-                    if (_Entity._BonusPlayer3 != null)
+                    if (_Entity._BonusPlayer[2] != null)
                     {
-                        if (_Entity._BonusPlayer3.type == BonusType.Mirror && _Entity._BonusPlayer3.isActif)
+                        if (_Entity._BonusPlayer[2].type == BonusType.Mirror && _Entity._BonusPlayer[2].isActif)
                         {
                             Destroy(this.gameObject, 0.1f);
                             return;
                         }
                     }
-                    if (_Entity._BonusPlayer4 != null)
+                    if (_Entity._BonusPlayer[3] != null)
                     {
-                        if (_Entity._BonusPlayer4.type == BonusType.Mirror && _Entity._BonusPlayer4.isActif)
+                        if (_Entity._BonusPlayer[3].type == BonusType.Mirror && _Entity._BonusPlayer[3].isActif)
                         {
                             Destroy(this.gameObject, 0.1f);
                             return;
