@@ -3,17 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Card
+public enum Card
 {
-    public int id = 0;
-    public string name = "default";
+    Shild,
+    Bomb,
+    Giant,
+    Jump,
+    Laser,
+    Speed,
 }
 
-public class Deck : MonoBehaviour
+public class Deck
 {
     public List<Card> cards = new List<Card>();
+    private List<Card> discard = new List<Card>();
 
-    private void Start()
+    public void Init()
     {
         if (cards.Count == 0)
         {
@@ -23,28 +28,22 @@ public class Deck : MonoBehaviour
 
         Shuffle();
         Debug.Log("Deck shuffle");
-        /*
-        for (int i = 0; i < cards.Count; i++)
-        {
-            Debug.Log(cards[i].id);
-        }
-        */
-
-        Debug.Log("card take : " + TakeCard().id);
-
-        for (int i = 0; i < cards.Count; i++)
-        {
-            Debug.Log(cards[i].id);
-        }
-        
+        Debug.Log(cards.Count);
     }
 
     public void ConstructDeck()
     {
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 100; i++)
         {
             cards.Add(new Card());
-            cards[i].id = i;
+            if (Random.Range(0,2)==0)
+            {
+                cards[i] = Card.Shild;
+            }
+            else
+            {
+                cards[i] = Card.Giant;
+            }
         }
     }
 
@@ -61,10 +60,32 @@ public class Deck : MonoBehaviour
 
     public Card TakeCard()
     {
+        if (cards.Count == 0)
+        {
+            if (discard.Count == 0)
+            {
+                Debug.LogError("No mor card on the deck");
+                return Card.Shild;
+            }
+
+            Debug.Log("Use discard card to remake a card pile");
+
+            cards = discard;
+            Debug.Log(cards.Count);
+            discard = new List<Card>();
+            Debug.Log(cards.Count);
+            Shuffle();
+        }
+
         int j = Random.Range(0, cards.Count);
         Card tmpCard = cards[j];
         cards.RemoveAt(j);
 
         return tmpCard;
+    }
+
+    public void AddDiscardCard(Card card)
+    {
+        discard.Add(card);
     }
 }
