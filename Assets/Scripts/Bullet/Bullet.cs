@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] [ReadOnly] private int _Damage;
     [SerializeField] [ReadOnly] private GameObject _Target;
+    private int _Multiplier = 1;
     private float _TimeToReachTarget;
     private Vector3 _StartPosition;
     private float ratio;
@@ -43,21 +44,75 @@ public class Bullet : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<Entity>() != null)
         {
-            if(collision.gameObject.GetComponent<Entity>().entitiesStats._Type == EntitiesStats.Type.Robot)
+            var _Entity = collision.gameObject.GetComponent<Entity>();
+
+            if (_Entity.entitiesStats._Type == EntitiesStats.Type.Robot)
             {
-                if (!collision.gameObject.GetComponent<Entity>()._SetTank && bulletType == BulletType.Classic)
+                if (bulletType == BulletType.Classic)
                 {
+                    if (_Entity._BonusPlayer1 != null)
+                    {
+                        if (_Entity._BonusPlayer1.type == BonusType.Tank && _Entity._BonusPlayer1.isActif)
+                            _Multiplier = _Multiplier * 2;
+                    }
+                    if (_Entity._BonusPlayer2 != null)
+                    {
+                        if (_Entity._BonusPlayer2.type == BonusType.Tank && _Entity._BonusPlayer2.isActif)
+                            _Multiplier = _Multiplier * 2;
+                    }
+                    if (_Entity._BonusPlayer3 != null)
+                    {
+                        if (_Entity._BonusPlayer3.type == BonusType.Tank && _Entity._BonusPlayer3.isActif)
+                            _Multiplier = _Multiplier * 2;
+                    }
+                    if (_Entity._BonusPlayer4 != null)
+                    {
+                        if (_Entity._BonusPlayer4.type == BonusType.Tank && _Entity._BonusPlayer4.isActif)
+                            _Multiplier = _Multiplier * 2;
+                    }
+
+                    if (_Multiplier < 4)
+                    {
+                        collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage / _Multiplier);
+                    }
+                    Destroy(this.gameObject, 0.1f);
+                }
+                else if (bulletType == BulletType.Laser)
+                {
+                    if (_Entity._BonusPlayer1 != null)
+                    {
+                        if (_Entity._BonusPlayer1.type == BonusType.Mirror && _Entity._BonusPlayer1.isActif)
+                        {
+                            Destroy(this.gameObject, 0.1f);
+                            return;
+                        }
+                    }
+                    if (_Entity._BonusPlayer2 != null)
+                    {
+                        if (_Entity._BonusPlayer2.type == BonusType.Mirror && _Entity._BonusPlayer2.isActif)
+                        {
+                            Destroy(this.gameObject, 0.1f);
+                            return;
+                        }
+                    }
+                    if (_Entity._BonusPlayer3 != null)
+                    {
+                        if (_Entity._BonusPlayer3.type == BonusType.Mirror && _Entity._BonusPlayer3.isActif)
+                        {
+                            Destroy(this.gameObject, 0.1f);
+                            return;
+                        }
+                    }
+                    if (_Entity._BonusPlayer4 != null)
+                    {
+                        if (_Entity._BonusPlayer4.type == BonusType.Mirror && _Entity._BonusPlayer4.isActif)
+                        {
+                            Destroy(this.gameObject, 0.1f);
+                            return;
+                        }
+                    }
                     collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage);
                 }
-                if(!collision.gameObject.GetComponent<Entity>()._SetMirror && bulletType == BulletType.Laser)
-                {
-                    collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage);
-                }
-                else if(collision.gameObject.GetComponent<Entity>()._SetMirror && bulletType == BulletType.Laser)
-                {
-                    collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage / 2);
-                }
-                Destroy(this.gameObject, 0.1f);
             }
         }
     }

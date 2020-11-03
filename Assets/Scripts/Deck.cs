@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public enum Card
 {
-    Shild,
+    Shield,
     Bomb,
     Giant,
     Jump,
@@ -39,7 +39,7 @@ public class Deck
             switch (Random.Range(0, 6))
             {
                 case 0:
-                    cards[i] = Card.Shild;
+                    cards[i] = Card.Shield;
                     break;
                 case 1:
                     cards[i] = Card.Bomb;
@@ -78,7 +78,7 @@ public class Deck
             if (discard.Count == 0)
             {
                 Debug.LogError("No mor card on the deck");
-                return Card.Shild;
+                return Card.Shield;
             }
 
             Debug.Log("Use discard card to remake a card pile");
