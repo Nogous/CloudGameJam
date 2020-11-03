@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] [ReadOnly] private int _Damage;
     [SerializeField] [ReadOnly] private GameObject _Target;
-    private int _TimeToReachTarget;
+    private float _TimeToReachTarget;
     private Vector3 _StartPosition;
     private float ratio;
     public AnimationCurve _AnimCurve;
@@ -32,7 +32,7 @@ public class Bullet : MonoBehaviour
         this.transform.position = Vector3.Lerp(_StartPosition, _Target.transform.position, ratio < 1 ? _AnimCurve.Evaluate(ratio) : ratio);
     }
 
-    public void SetDefaultVariable(int damage, GameObject target, int time)
+    public void SetDefaultVariable(int damage, GameObject target, float time)
     {
         _Damage = damage;
         _Target = target;
