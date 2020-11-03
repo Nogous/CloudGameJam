@@ -39,6 +39,9 @@ public class GameManager : MonoBehaviour
     private bool[] playerChois;
     private List<Card> useCards = new List<Card>();
 
+    // path 
+    public List<GameObject> path;
+
     private void Awake()
     {
         nbPlayer = GameData.nbPlayer;
@@ -125,6 +128,7 @@ public class GameManager : MonoBehaviour
     public void CreateRobot()
     {
         Entity tmpRobot = Instantiate(robotPrefab, robotFactoryPos.position, Quaternion.identity).GetComponent<Entity>();
+        tmpRobot._WalkingPath = path;
         foreach (Card item in useCards)
         {
             switch (item)
