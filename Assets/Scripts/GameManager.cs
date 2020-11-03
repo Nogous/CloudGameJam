@@ -39,6 +39,11 @@ public class GameManager : MonoBehaviour
     private bool[] playerChois;
     private List<Card> useCards = new List<Card>();
 
+    private void Awake()
+    {
+        nbPlayer = GameData.nbPlayer;
+    }
+
     private void Start()
     {
         players = new Player[nbPlayer];
