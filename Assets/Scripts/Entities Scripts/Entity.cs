@@ -69,7 +69,7 @@ public class Entity : MonoBehaviour
         Movement();
     }
 
-   public void SetGiant()
+   private void SetGiant()
     {
         _SetGiant = true;
         _CurrentHealth = _CurrentHealth * 2;

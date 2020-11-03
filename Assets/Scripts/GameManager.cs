@@ -27,6 +27,9 @@ public class GameManager : MonoBehaviour
     // UI
     public PlayerHandImage[] playerHandsImage;
 
+    // Prefabs
+    public Transform robotFactoryPos;
+    public GameObject robotPrefab;
 
     private void Start()
     {
@@ -97,16 +100,36 @@ public class GameManager : MonoBehaviour
         return tmpCard;
     }
 
-    #region test
-    private void Update()
+    public void CreateRobot(List<Card> cards)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        Entity tmpRobot = Instantiate(robotPrefab, robotFactoryPos.position, Quaternion.identity).GetComponent<Entity>();
+        foreach (Card item in cards)
         {
-            UseCard(0,0);
-            UseCard(1,0);
-            UseCard(2,1);
-            UseCard(3,2);
+            switch (item)
+            {
+                case Card.Shild:
+                    tmpRobot._SetTank = true;
+                    break;
+                case Card.Bomb:
+                    break;
+                case Card.Giant:
+                    tmpRobot._SetGiant = true;
+                    break;
+                case Card.Jump:
+                    break;
+                case Card.Laser:
+                    tmpRobot._SetMirror = true;
+                    break;
+                case Card.Speed:
+                    tmpRobot._SetFaster = true;
+                    break;
+                default:
+                    break;
+            }
         }
     }
-    #endregion
+
+    private void Update()
+    {
+    }
 }
