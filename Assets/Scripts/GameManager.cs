@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Rewired;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -31,8 +32,23 @@ public class GameManager : MonoBehaviour
     public Transform robotFactoryPos;
     public GameObject robotPrefab;
 
+    // rewired
+    private Player[] players;
+
+    // inputs
+    private bool[] playerChois;
+    private List<Card> useCards = new List<Card>();
+
     private void Start()
     {
+        players = new Player[nbPlayer];
+        playerChois = new bool[nbPlayer];
+
+        for (int i = 0; i < nbPlayer; i++)
+        {
+            players[i] = ReInput.players.GetPlayer(i);
+        }
+
         for (int i = 0; i < playerHandsImage.Length; i++)
         {
             playerHandsImage[i].obj.SetActive(i < nbPlayer);
@@ -96,14 +112,15 @@ public class GameManager : MonoBehaviour
         deck.AddDiscardCard(tmpCard);
         playerHands[idPlayer].card[idCard] = deck.TakeCard();
         UpdateUI();
+        useCards.Add(tmpCard);
 
         return tmpCard;
     }
 
-    public void CreateRobot(List<Card> cards)
+    public void CreateRobot()
     {
         Entity tmpRobot = Instantiate(robotPrefab, robotFactoryPos.position, Quaternion.identity).GetComponent<Entity>();
-        foreach (Card item in cards)
+        foreach (Card item in useCards)
         {
             switch (item)
             {
@@ -131,5 +148,38 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        for (int i = players.Length; i-->0;)
+        {
+            if (!playerChois[i])
+            {
+                if (players[i].GetButtonDown("X"))
+                {
+                    UseCard(i, 0);
+                    playerChois[i] = true;
+                }
+                else if (players[i].GetButtonDown("Y"))
+                {
+                    UseCard(i, 1);
+                    playerChois[i] = true;
+                }
+                else if (players[i].GetButtonDown("B"))
+                {
+                    UseCard(i, 2);
+                    playerChois[i] = true;
+                }
+            }
+        }
+
+        for (int i = 0; i < nbPlayer; i++)
+        {
+            if (!playerChois[i]) return;
+        }
+
+        for (int i = 0; i < nbPlayer; i++)
+        {
+            playerChois[i] = false;
+        }
+        CreateRobot();
+        useCards.Clear();
     }
 }
