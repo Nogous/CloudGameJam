@@ -129,25 +129,25 @@ public class GameManager : MonoBehaviour
     {
         Entity tmpRobot = Instantiate(robotPrefab, robotFactoryPos.position, Quaternion.identity).GetComponent<Entity>();
         tmpRobot._WalkingPath = path;
-        foreach (Card item in useCards)
-        {
-            switch (item)
+        for (int i = 0; i < useCards.Count - 1; )
+        { 
+            switch (useCards[i])
             {
                 case Card.Shield:
-                    tmpRobot._BonusPlayer1 = tmpRobot.gameObject.AddComponent<Bonus_Tank>();
+                    tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Tank>();
                     break;
                 case Card.Bomb:
                     break;
                 case Card.Giant:
-                    tmpRobot._BonusPlayer1 = tmpRobot.gameObject.AddComponent<Bonus_Giant>();
+                    tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Giant>();
                     break;
                 case Card.Jump:
                     break;
                 case Card.Laser:
-                    tmpRobot._BonusPlayer1 = tmpRobot.gameObject.AddComponent<Bonus_Mirror>();
+                    tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Mirror>();
                     break;
                 case Card.Speed:
-                    tmpRobot._BonusPlayer1 = tmpRobot.gameObject.AddComponent<Bonus_Faster>();
+                    tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Faster>();
                     break;
                 default:
                     break;
