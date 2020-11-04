@@ -188,7 +188,8 @@ public class Entity : MonoBehaviour
                 else if(this.entitiesStats._Type == EntitiesStats.Type.Nexus)
                 {
                     Debug.Log("Victory ! You destroy Nexus.");
-                    UIManager.instance.StatePanelVictory(true);
+                    if (UIManager.instance != null)
+                        UIManager.instance.StatePanelVictory(true);
                 }
             }
         }
