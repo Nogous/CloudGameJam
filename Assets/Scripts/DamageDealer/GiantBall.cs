@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class GiantBall : MonoBehaviour
 {
-    [SerializeField] [ReadOnly] protected int _Damage;
-    [SerializeField] [ReadOnly] protected GameObject _Target;
-    private float _TimeToReachTarget;
+    public int _Damage;
+    public float _TimeToReachTarget;
     private Vector3 _StartPosition;
     private float ratio;
     public DamageDealerType damageDealerType = DamageDealerType.Bullet;
@@ -17,7 +16,6 @@ public class GiantBall : MonoBehaviour
     Vector3 _CurrentNextPositionPath;
     private float _CurrentPos = 0;
     private int _CurrentObjectID = 0;
-    public float speed = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +48,7 @@ public class GiantBall : MonoBehaviour
         //    transform.rotation = Quaternion.Euler(0, 0, transform.rotation.x + Time.deltaTime * speed);
         //}
 
-        _CurrentPos += Time.deltaTime * speed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
+        _CurrentPos += Time.deltaTime * _TimeToReachTarget / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
 
         if (this.transform.position != _CurrentNextPositionPath)
         {
@@ -76,13 +74,6 @@ public class GiantBall : MonoBehaviour
         _CurrentPos = 0;
         _StartPosition = this.transform.position;
         _CurrentNextPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
-    }
-
-    public void SetDefaultVariable(int damage, GameObject target, float time)
-    {
-        _Damage = damage;
-        _Target = target;
-        _TimeToReachTarget = time;
     }
 
     public void OnTriggerEnter(Collider collision)

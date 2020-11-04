@@ -106,8 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e933b6f46473362448bc5fc14f6522f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Damage: 0
+  _Damage: 10000
   _Target: {fileID: 0}
+  _TimeToReachTarget: 1
   damageDealerType: 3
   _WalkingPath: []
   _AnimCurve:
@@ -134,4 +135,3 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  speed: 1.5
