@@ -54,22 +54,22 @@ public class Bullet : MonoBehaviour
                 {
                     if (_Entity._BonusPlayer[0] != null)
                     {
-                        if (_Entity._BonusPlayer[0].type == BonusType.Tank && _Entity._BonusPlayer[0].isActif)
+                        if (_Entity._BonusPlayer[0].type == BonusType.Tank && _Entity._BonusPlayer[0].isActive)
                             _Multiplier = _Multiplier * 2;
                     }
                     if (_Entity._BonusPlayer[1] != null)
                     {
-                        if (_Entity._BonusPlayer[1].type == BonusType.Tank && _Entity._BonusPlayer[1].isActif)
+                        if (_Entity._BonusPlayer[1].type == BonusType.Tank && _Entity._BonusPlayer[1].isActive)
                             _Multiplier = _Multiplier * 2;
                     }
                     if (_Entity._BonusPlayer[2] != null)
                     {
-                        if (_Entity._BonusPlayer[2].type == BonusType.Tank && _Entity._BonusPlayer[2].isActif)
+                        if (_Entity._BonusPlayer[2].type == BonusType.Tank && _Entity._BonusPlayer[2].isActive)
                             _Multiplier = _Multiplier * 2;
                     }
                     if (_Entity._BonusPlayer[3] != null)
                     {
-                        if (_Entity._BonusPlayer[3].type == BonusType.Tank && _Entity._BonusPlayer[3].isActif)
+                        if (_Entity._BonusPlayer[3].type == BonusType.Tank && _Entity._BonusPlayer[3].isActive)
                             _Multiplier = _Multiplier * 2;
                     }
 
@@ -83,7 +83,7 @@ public class Bullet : MonoBehaviour
                 {
                     if (_Entity._BonusPlayer[0] != null)
                     {
-                        if (_Entity._BonusPlayer[0].type == BonusType.Mirror && _Entity._BonusPlayer[0].isActif)
+                        if (_Entity._BonusPlayer[0].type == BonusType.Mirror && _Entity._BonusPlayer[0].isActive)
                         {
                             Destroy(this.gameObject, 0.1f);
                             return;
@@ -91,7 +91,7 @@ public class Bullet : MonoBehaviour
                     }
                     if (_Entity._BonusPlayer[1] != null)
                     {
-                        if (_Entity._BonusPlayer[1].type == BonusType.Mirror && _Entity._BonusPlayer[1].isActif)
+                        if (_Entity._BonusPlayer[1].type == BonusType.Mirror && _Entity._BonusPlayer[1].isActive)
                         {
                             Destroy(this.gameObject, 0.1f);
                             return;
@@ -99,7 +99,7 @@ public class Bullet : MonoBehaviour
                     }
                     if (_Entity._BonusPlayer[2] != null)
                     {
-                        if (_Entity._BonusPlayer[2].type == BonusType.Mirror && _Entity._BonusPlayer[2].isActif)
+                        if (_Entity._BonusPlayer[2].type == BonusType.Mirror && _Entity._BonusPlayer[2].isActive)
                         {
                             Destroy(this.gameObject, 0.1f);
                             return;
@@ -107,7 +107,7 @@ public class Bullet : MonoBehaviour
                     }
                     if (_Entity._BonusPlayer[3] != null)
                     {
-                        if (_Entity._BonusPlayer[3].type == BonusType.Mirror && _Entity._BonusPlayer[3].isActif)
+                        if (_Entity._BonusPlayer[3].type == BonusType.Mirror && _Entity._BonusPlayer[3].isActive)
                         {
                             Destroy(this.gameObject, 0.1f);
                             return;

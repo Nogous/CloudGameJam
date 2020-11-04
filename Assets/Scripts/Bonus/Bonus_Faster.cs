@@ -4,40 +4,29 @@ using UnityEngine;
 
 public class Bonus_Faster : Bonus
 {
-
-    private void Reset()
-    {
-        this.type = BonusType.Faster;
-    }
+    [SerializeField] private float speedMultiplicator = 2f;
+    private Entity myEntity;
 
     protected override void Start()
     {
         base.Start();
+        myEntity = GetComponent<Entity>();
+        if (myEntity == null)
+        {
+            Debug.LogError(gameObject + " ne contient pas d'entity");
+            Destroy(this);
+        }
     }
 
-    protected override void Update()
+    protected override void V_ActiveBonus()
     {
-        base.Update();
+        base.V_ActiveBonus();
+        myEntity._CurrentMovementSpeed *= speedMultiplicator;
     }
 
-    public override void ActiveBonus()
+    protected override void EndBonus()
     {
-        base.ActiveBonus();
-
-        gameObject.GetComponent<Entity>()._CurrentMovementSpeed = gameObject.GetComponent<Entity>()._CurrentMovementSpeed * _Multiplier;
-        this.gameObject.transform.localScale = this.gameObject.transform.localScale * _Multiplier;
-    }
-
-    public override void ActifCooldown()
-    {
-        base.ActifCooldown();
-    }
-
-    public override void DeactivateBonus()
-    {
-        base.DeactivateBonus();
-
-        gameObject.GetComponent<Entity>()._CurrentMovementSpeed = gameObject.GetComponent<Entity>()._CurrentMovementSpeed / _Multiplier;
-        this.gameObject.transform.localScale = this.gameObject.transform.localScale / _Multiplier;
+        base.EndBonus();
+        myEntity._CurrentMovementSpeed /= speedMultiplicator;
     }
 }
