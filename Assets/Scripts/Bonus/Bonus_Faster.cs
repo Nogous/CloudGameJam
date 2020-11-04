@@ -5,18 +5,6 @@ using UnityEngine;
 public class Bonus_Faster : Bonus
 {
     [SerializeField] private float speedMultiplicator = 2f;
-    private Entity myEntity;
-
-    protected override void Start()
-    {
-        base.Start();
-        myEntity = GetComponent<Entity>();
-        if (myEntity == null)
-        {
-            Debug.LogError(gameObject + " ne contient pas d'entity");
-            Destroy(this);
-        }
-    }
 
     protected override void V_ActiveBonus()
     {

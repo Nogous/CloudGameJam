@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 49345395}
   - component: {fileID: 49345399}
   - component: {fileID: 49345400}
+  - component: {fileID: 49345401}
   m_Layer: 0
   m_Name: Robot
   m_TagString: Untagged
@@ -368,6 +369,9 @@ MonoBehaviour:
   _CurrentMovementSpeed: 0
   _CurrentAttackSpeed: 0
   _CurrentHitRange: 0
+  shield: 0
+  giant: 0
+  focusScale: 1
   _WalkingPath:
   - {fileID: 1512504509}
   - {fileID: 629368124}
@@ -406,10 +410,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 0}
-  _BonusPlayer1: {fileID: 0}
-  _BonusPlayer2: {fileID: 0}
-  _BonusPlayer3: {fileID: 0}
-  _BonusPlayer4: {fileID: 0}
+  _BonusPlayer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  speedScale: 1
 --- !u!54 &49345400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -426,6 +432,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &49345401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 49345394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7556ff830fd25154a8d6d1553df00b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  isActive: 0
+  cooldown: 2
+  cooldownLogic: 0
+  bonusDuration: 3
+  bonusDurationLogic: 0
+  scaleMultiplicateur: 1.2
+  isGrowing: 0
+  isRapetic: 0
 --- !u!1 &139067220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1091,6 +1118,8 @@ GameObject:
   - component: {fileID: 1010575980}
   - component: {fileID: 1010575979}
   - component: {fileID: 1010575978}
+  - component: {fileID: 1010575984}
+  - component: {fileID: 1010575985}
   m_Layer: 0
   m_Name: Robot (1)
   m_TagString: Untagged
@@ -1132,6 +1161,9 @@ MonoBehaviour:
   _CurrentMovementSpeed: 0
   _CurrentAttackSpeed: 0
   _CurrentHitRange: 0
+  shield: 0
+  giant: 0
+  focusScale: 1
   _WalkingPath:
   - {fileID: 1512504509}
   - {fileID: 629368124}
@@ -1170,10 +1202,12 @@ MonoBehaviour:
     m_RotationOrder: 4
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 0}
-  _BonusPlayer1: {fileID: 0}
-  _BonusPlayer2: {fileID: 0}
-  _BonusPlayer3: {fileID: 0}
-  _BonusPlayer4: {fileID: 0}
+  _BonusPlayer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  speedScale: 1
 --- !u!65 &1010575980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1248,6 +1282,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1010575984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010575977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7556ff830fd25154a8d6d1553df00b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  isActive: 0
+  cooldown: 2
+  cooldownLogic: 0
+  bonusDuration: 5
+  bonusDurationLogic: 0
+  scaleMultiplicateur: 1.2
+  isGrowing: 0
+  isRapetic: 0
+--- !u!114 &1010575985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010575977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7556ff830fd25154a8d6d1553df00b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+  isActive: 0
+  cooldown: 3
+  cooldownLogic: 0
+  bonusDuration: 3
+  bonusDurationLogic: 0
+  scaleMultiplicateur: 1.2
+  isGrowing: 0
+  isRapetic: 0
 --- !u!1 &1369726414
 GameObject:
   m_ObjectHideFlags: 0
@@ -1841,6 +1917,9 @@ MonoBehaviour:
   _CurrentMovementSpeed: 0
   _CurrentAttackSpeed: 0
   _CurrentHitRange: 0
+  shield: 0
+  giant: 0
+  focusScale: 1
   _WalkingPath: []
   _AnimCurve:
     serializedVersion: 2
@@ -1851,10 +1930,12 @@ MonoBehaviour:
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 6694740371106907897, guid: 507bf1b9cb0ccec4ab3d719b702130fc,
     type: 3}
-  _BonusPlayer1: {fileID: 0}
-  _BonusPlayer2: {fileID: 0}
-  _BonusPlayer3: {fileID: 0}
-  _BonusPlayer4: {fileID: 0}
+  _BonusPlayer:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  speedScale: 1
 --- !u!135 &1771298197
 SphereCollider:
   m_ObjectHideFlags: 0
