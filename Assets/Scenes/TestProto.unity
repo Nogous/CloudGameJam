@@ -416,6 +416,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   speedScale: 1
+  jumpHeight: 1
+  jumpSpeed: 1
 --- !u!54 &49345400
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -441,18 +443,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 49345394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7556ff830fd25154a8d6d1553df00b74, type: 3}
+  m_Script: {fileID: 11500000, guid: 98c04736411f8594a9de16b0061a600a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
   isActive: 0
-  cooldown: 2
+  cooldown: 10
   cooldownLogic: 0
-  bonusDuration: 3
+  bonusDuration: 10
   bonusDurationLogic: 0
-  scaleMultiplicateur: 1.2
-  isGrowing: 0
-  isRapetic: 0
 --- !u!1 &139067220
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,6 +1207,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   speedScale: 1
+  jumpHeight: 1
+  jumpSpeed: 1
 --- !u!65 &1010575980
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1936,6 +1937,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   speedScale: 1
+  jumpHeight: 1
+  jumpSpeed: 1
 --- !u!135 &1771298197
 SphereCollider:
   m_ObjectHideFlags: 0
