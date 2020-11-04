@@ -16,5 +16,5 @@ MonoBehaviour:
   _HealthBase: 100
   _MovementSpeedBase: 0
   _HitRangeBase: 5
-  _AttackSpeedBase: 1
-  _DamageBase: 50
+  _AttackSpeedBase: 0.5
+  _DamageBase: 2
