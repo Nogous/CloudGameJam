@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     // path
     public List<GameObject> path;
 
-    public bool pause;
+    [ReadOnly] public bool pause;
 
     public static GameManager instance;
 
