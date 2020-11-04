@@ -176,6 +176,7 @@ public class GameManager : MonoBehaviour
     public void ChangePauseBool(bool newValue)
     {
         pause = newValue;
+        UIManager.instance.StatePanelPause(pause);
     }
 
     private void Update()
