@@ -106,8 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e933b6f46473362448bc5fc14f6522f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Damage: 10000
-  _Target: {fileID: 0}
+  _Damage: 50
   _TimeToReachTarget: 1
   damageDealerType: 3
   _WalkingPath: []
