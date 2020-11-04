@@ -28,6 +28,8 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.instance.pause) { return; }
+
         ratio += Time.deltaTime / _TimeToReachTarget;
 
         this.transform.position = Vector3.Lerp(_StartPosition, _Target.transform.position, ratio < 1 ? _AnimCurve.Evaluate(ratio) : ratio);
