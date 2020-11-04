@@ -70,22 +70,8 @@ public class Entity : MonoBehaviour
         Attack();
         Movement();
 
-        if (transform.localScale.x < initScale.x * focusScale)
-        {
-            transform.localScale += Vector3.one * Time.deltaTime * speedScale;
-            if (transform.localScale.x > initScale.x * focusScale)
-            {
-                transform.localScale = initScale * focusScale;
-            }
-        }
-        else if (transform.localScale.x > initScale.x * focusScale)
-        {
-            transform.localScale -= Vector3.one * Time.deltaTime * speedScale;
-            if (transform.localScale.x < initScale.x * focusScale)
-            {
-                transform.localScale = initScale * focusScale;
-            }
-        }
+        UpdateJump();
+        UpdateScale();
     }
 
     void Attack()
@@ -114,6 +100,35 @@ public class Entity : MonoBehaviour
                     _EnnemyEntities.Remove(_EnnemyEntities[0]);
                 }
 
+            }
+        }
+    }
+    public void Jump()
+    {
+
+    }
+
+    private void UpdateJump()
+    {
+
+    }
+
+    private void UpdateScale()
+    {
+        if (transform.localScale.x < initScale.x * focusScale)
+        {
+            transform.localScale += Vector3.one * Time.deltaTime * speedScale;
+            if (transform.localScale.x > initScale.x * focusScale)
+            {
+                transform.localScale = initScale * focusScale;
+            }
+        }
+        else if (transform.localScale.x > initScale.x * focusScale)
+        {
+            transform.localScale -= Vector3.one * Time.deltaTime * speedScale;
+            if (transform.localScale.x < initScale.x * focusScale)
+            {
+                transform.localScale = initScale * focusScale;
             }
         }
     }

@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
+    private Entity[] robots = new Entity[4];
+
     private void Awake()
     {
         if(instance == null)
@@ -169,8 +171,14 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        Debug.Log("return");
-        return;
+        for (int i = 0; i < robots.Length; i++)
+        {
+            if (robots[i] == null)
+            {
+                robots[i] = tmpRobot;
+                return;
+            }
+        }
     }
 
     public void ChangePauseBool(bool newValue)
@@ -211,6 +219,23 @@ public class GameManager : MonoBehaviour
                     UseCard(i, 2);
                     playerChois[i] = true;
                 }
+            }
+
+            if (players[i].GetButtonDown("ActiveRobot1") && robots[0]!= null)
+            {
+                robots[0]._BonusPlayer[i].ActiveBonus();
+            }
+            if (players[i].GetButtonDown("ActiveRobot2") && robots[1] != null)
+            {
+                robots[1]._BonusPlayer[i].ActiveBonus();
+            }
+            if (players[i].GetButtonDown("ActiveRobot3") && robots[2] != null)
+            {
+                robots[2]._BonusPlayer[i].ActiveBonus();
+            }
+            if (players[i].GetButtonDown("ActiveRobot4") && robots[3] != null)
+            {
+                robots[3]._BonusPlayer[i].ActiveBonus();
             }
         }
 

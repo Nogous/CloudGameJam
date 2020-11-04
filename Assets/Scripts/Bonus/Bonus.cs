@@ -59,15 +59,10 @@ public class Bonus : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ActiveBonus();
-        }
-
         CooldownReload();
         UpdateBonus();
     }
-    private void ActiveBonus()
+    public void ActiveBonus()
     {
         if (cooldownLogic > 0) return;
 
