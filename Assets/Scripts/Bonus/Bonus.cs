@@ -16,6 +16,8 @@ public class Bonus : MonoBehaviour
 
     public bool isActive = false;
 
+    protected Entity myEntity;
+
     public float cooldown = 10f;
     [ReadOnly] [SerializeField] private float cooldownLogic;
 
@@ -26,6 +28,13 @@ public class Bonus : MonoBehaviour
     protected virtual void Start()
     {
         cooldownLogic = 0;
+
+        myEntity = GetComponent<Entity>();
+        if (myEntity == null)
+        {
+            Debug.LogError(gameObject + " ne contient pas d'entity");
+            Destroy(this);
+        }
     }
     
     protected virtual void V_ActiveBonus() { }

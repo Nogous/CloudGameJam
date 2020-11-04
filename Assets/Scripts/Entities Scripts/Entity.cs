@@ -14,6 +14,10 @@ public class Entity : MonoBehaviour
     [ReadOnly] public float _CurrentMovementSpeed = 0;
     [ReadOnly] public float _CurrentAttackSpeed = 0;
     [ReadOnly] public int _CurrentHitRange = 0;
+    [ReadOnly] public int shield = 0;
+    [ReadOnly] public int giant = 0;
+    [ReadOnly] public float focusScale = 1f;
+    private Vector3 initScale;
 
     [Header("Path factory to Nexus")]
     public List<GameObject> _WalkingPath;
@@ -32,6 +36,7 @@ public class Entity : MonoBehaviour
 
     [Header("Robot Bonus Bool")]
     [ReadOnly] public Bonus[] _BonusPlayer = new Bonus[4];
+    public float speedScale = 1f;
 
     private void Awake()
     {
@@ -55,7 +60,7 @@ public class Entity : MonoBehaviour
         if (_WalkingPath.Count != 0)
             CheckPath();
 
-        //gameObject.AddComponent<Bonus_Faster>();
+        initScale = gameObject.transform.localScale;
     }
 
     // Update is called once per frame
@@ -64,6 +69,23 @@ public class Entity : MonoBehaviour
         if (GameManager.instance.pause) { return; }
         Attack();
         Movement();
+
+        if (transform.localScale.x < initScale.x * focusScale)
+        {
+            transform.localScale += Vector3.one * Time.deltaTime * speedScale;
+            if (transform.localScale.x > initScale.x * focusScale)
+            {
+                transform.localScale = initScale * focusScale;
+            }
+        }
+        else if (transform.localScale.x > initScale.x * focusScale)
+        {
+            transform.localScale -= Vector3.one * Time.deltaTime * speedScale;
+            if (transform.localScale.x < initScale.x * focusScale)
+            {
+                transform.localScale = initScale * focusScale;
+            }
+        }
     }
 
     void Attack()
@@ -96,9 +118,21 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, BulletType bulletType)
     {
-        this._CurrentHealth -= damage;
+        if (shield == 1 && bulletType == BulletType.Classic)
+        {
+            this._CurrentHealth -= (int)(damage/2);
+        }
+        else if(shield == 2 && bulletType == BulletType.Classic)
+        {
+            this._CurrentHealth -= 0;
+        }
+        else
+        {
+            this._CurrentHealth -= (int)(damage);
+        }
+
         if (_CurrentHealth <= 0)
         {
             Death();
