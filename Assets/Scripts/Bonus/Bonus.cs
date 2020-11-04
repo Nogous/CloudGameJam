@@ -10,53 +10,75 @@ public enum BonusType {
     Mirror,
 
 }
-
 public class Bonus : MonoBehaviour
 {
     [ReadOnly] public BonusType type;
 
-    public bool isActif = false;
+    public bool isActive = false;
 
-    public int _Multiplier = 2;
+    public float cooldown = 10f;
+    [ReadOnly] [SerializeField] private float cooldownLogic;
 
-    public bool _IsCooldownNeeded = false;
+    public float bonusDuration = 10f;
+    [ReadOnly] [SerializeField] private float bonusDurationLogic;
 
-    protected float cooldown;
-    public float cooldownMax = 10f;
-
+    #region virtual
     protected virtual void Start()
     {
-        cooldown = cooldownMax;
-    }
-
-    protected virtual void Update()
-    {
-        ActifCooldown();
+        cooldownLogic = 0;
     }
     
-    public virtual void ActiveBonus()
+    protected virtual void V_ActiveBonus() { }
+
+    protected virtual void UpdateBonus()
     {
-        isActif = true;
+        if (!isActive) return;
+        bonusDurationLogic -= Time.deltaTime;
+        if (bonusDurationLogic<= 0)
+        {
+            EndBonus();
+        }
     }
 
-    public virtual void ActifCooldown()
+    protected virtual void EndBonus()
     {
-       if(isActif && _IsCooldownNeeded)
+        isActive = false;
+    }
+    #endregion
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(cooldown > 0)
+            ActiveBonus();
+        }
+
+        CooldownReload();
+        UpdateBonus();
+    }
+    private void ActiveBonus()
+    {
+        if (cooldownLogic > 0) return;
+
+        cooldownLogic = cooldown;
+        Debug.Log(cooldownLogic);
+        bonusDurationLogic = bonusDuration;
+        V_ActiveBonus();
+
+        isActive = true;
+    }
+    private void CooldownReload()
+    {
+       if(!isActive)
+        {
+            if(cooldownLogic > 0)
             {
-                cooldown -= Time.deltaTime;
-            }
-            else
-            {
-                DeactivateBonus();
+                cooldownLogic -= Time.deltaTime;
             }
         }
     }
 
-    public virtual void DeactivateBonus()
+    public void BonusCancel()
     {
-        cooldown = cooldownMax;
-        isActif = false;
     }
 }
