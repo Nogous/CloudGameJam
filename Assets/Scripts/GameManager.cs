@@ -176,14 +176,6 @@ public class GameManager : MonoBehaviour
     public void ChangePauseBool(bool newValue)
     {
         pause = newValue;
-        if(pause)
-        {
-            Time.timeScale = 0;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
     }
 
     private void Update()

@@ -41,6 +41,8 @@ public class Bonus : MonoBehaviour
 
     protected virtual void UpdateBonus()
     {
+        if (GameManager.instance.pause) { return; }
+
         if (!isActive) return;
         bonusDurationLogic -= Time.deltaTime;
         if (bonusDurationLogic<= 0)
