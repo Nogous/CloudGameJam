@@ -38,6 +38,12 @@ public class Entity : MonoBehaviour
     [ReadOnly] public Bonus[] _BonusPlayer = new Bonus[4];
     public float speedScale = 1f;
 
+    private int jumpCount = 0;
+    public float jumpHeight = 1f;
+    private float jumpTarget = 0f;
+    private float curentJump = 0f;
+    public float jumpSpeed = 1f;
+
     private void Awake()
     {
         _CurrentHealth = entitiesStats._HealthBase ;
@@ -105,12 +111,41 @@ public class Entity : MonoBehaviour
     }
     public void Jump()
     {
+        jumpCount++;
+        jumpTarget = jumpHeight;
+    }
 
+    public void EndJump()
+    {
+        jumpCount--;
+        if (jumpCount<= 0)
+        {
+            jumpTarget = 0;
+        }
     }
 
     private void UpdateJump()
     {
+        if (curentJump < jumpTarget)
+        {
+            curentJump += jumpSpeed * Time.deltaTime;
 
+            if (curentJump > jumpTarget)
+            {
+                curentJump = jumpTarget;
+            }
+        }
+        else if (curentJump > jumpTarget)
+        {
+            curentJump -= jumpSpeed * Time.deltaTime;
+
+            if (curentJump < jumpTarget)
+            {
+                curentJump = jumpTarget;
+            }
+        }
+
+        transform.position += curentJump * Vector3.up;
     }
 
     private void UpdateScale()
@@ -163,21 +198,16 @@ public class Entity : MonoBehaviour
 
     void Movement()
     {
-        if (_CurrentMovementSpeed > 0 && _WalkingPath.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Robot)
+        if (_WalkingPath.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Robot)
         {
             _CurrentPos += Time.deltaTime * _CurrentMovementSpeed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
 
-            if (this.transform.position != _CurrentNextPositionPath)
+
+            this.transform.position = Vector3.Lerp(_StartPosition, _CurrentNextPositionPath, _AnimCurve.Evaluate(_CurrentPos));
+            if (_CurrentPos >=1)
             {
-                this.transform.position = Vector3.Lerp(_StartPosition, _CurrentNextPositionPath, _CurrentPos < 1 ? _AnimCurve.Evaluate(_CurrentPos) : _CurrentPos);
-            }
-            else
-            {
-                if(_CurrentObjectID < _WalkingPath.Count - 1)
-                {
-                    _CurrentObjectID++;
-                    CheckPath();
-                }
+                _CurrentObjectID++;
+                CheckPath();
             }
         }
     }
