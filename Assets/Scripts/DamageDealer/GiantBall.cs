@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class GiantBall : MonoBehaviour
 {
-    [SerializeField] [ReadOnly] protected int _Damage;
-    [SerializeField] [ReadOnly] protected GameObject _Target;
-    private float _TimeToReachTarget;
+    public int _Damage;
+    public float _TimeToReachTarget;
     private Vector3 _StartPosition;
     private float ratio;
     public DamageDealerType damageDealerType = DamageDealerType.Bullet;
@@ -17,12 +16,12 @@ public class GiantBall : MonoBehaviour
     Vector3 _CurrentNextPositionPath;
     private float _CurrentPos = 0;
     private int _CurrentObjectID = 0;
-    public float speed = 10;
 
     // Start is called before the first frame update
     void Start()
     {
         _StartPosition = this.gameObject.transform.position;
+        CheckPath();
     }
 
     // Update is called once per frame
@@ -30,7 +29,26 @@ public class GiantBall : MonoBehaviour
     {
         if (GameManager.instance.pause) { return; }
 
-        _CurrentPos += Time.deltaTime * speed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
+        //Debug.Log((_StartPosition - _CurrentNextPositionPath).normalized);
+
+        //if ((_StartPosition - _CurrentNextPositionPath).normalized == Vector3.forward)
+        //{
+        //    transform.rotation = Quaternion.Euler(transform.rotation.x - Time.deltaTime * speed * 10, 0, 0);
+        //}
+        //else if ((_StartPosition - _CurrentNextPositionPath).normalized == Vector3.back)
+        //{
+        //    transform.rotation = Quaternion.Euler(transform.rotation.x + Time.deltaTime * speed * 10, 0, 0);
+        //}
+        //else if ((_StartPosition - _CurrentNextPositionPath).normalized == Vector3.right)
+        //{
+        //    transform.rotation = Quaternion.Euler(0, 0, transform.rotation.x - Time.deltaTime * speed);
+        //}
+        //else
+        //{
+        //    transform.rotation = Quaternion.Euler(0, 0, transform.rotation.x + Time.deltaTime * speed);
+        //}
+
+        _CurrentPos += Time.deltaTime * _TimeToReachTarget / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
 
         if (this.transform.position != _CurrentNextPositionPath)
         {
@@ -58,14 +76,7 @@ public class GiantBall : MonoBehaviour
         _CurrentNextPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
     }
 
-    public void SetDefaultVariable(int damage, GameObject target, float time)
-    {
-        _Damage = damage;
-        _Target = target;
-        _TimeToReachTarget = time;
-    }
-
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.GetComponent<Entity>() != null)
         {
@@ -73,19 +84,34 @@ public class GiantBall : MonoBehaviour
 
             if (_Entity.entitiesStats._Type == EntitiesStats.Type.Robot)
             {
-                collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType);
                 int i = 0;
-                foreach(Bonus bonus in _Entity._BonusPlayer)
+
+                for(int z = 0; z < _Entity._BonusPlayer.Length; z++)
                 {
-                    if(bonus.type == BonusType.Giant)
+                    if(_Entity._BonusPlayer[z] != null)
                     {
-                        i++;
+                        if(_Entity._BonusPlayer[z].type == BonusType.Giant)
+                            i++;
                     }
                 }
-                if(i >= 2)
+                if (i == 1)
                 {
+                    Debug.Log("Damage Deal and get destroyed!");
+                    collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType);
                     Destroy(this.gameObject, 0.1f);
                 }
+                else if (i == 0)
+                {
+                    Debug.Log("Damage Deal !");
+                    collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType);
+                }
+                else
+                {
+                    Debug.Log("Damage don't deal and get destroyed !");
+                    Destroy(this.gameObject, 0.1f);
+                }
+
+
             }
         }
     }
