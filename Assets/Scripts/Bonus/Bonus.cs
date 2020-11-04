@@ -15,11 +15,11 @@ public class Bonus : MonoBehaviour
 {
     [ReadOnly] public BonusType type;
 
-    public bool isActif;
+    public bool isActif = false;
 
     public int _Multiplier = 2;
 
-    public bool _IsCooldownNeeded;
+    public bool _IsCooldownNeeded = false;
 
     protected float cooldown;
     public float cooldownMax = 10f;

@@ -128,8 +128,10 @@ public class GameManager : MonoBehaviour
     public void CreateRobot()
     {
         Entity tmpRobot = Instantiate(robotPrefab, robotFactoryPos.position, Quaternion.identity).GetComponent<Entity>();
+
         tmpRobot._WalkingPath = path;
-        for (int i = 0; i < useCards.Count - 1; )
+
+        for (int i = useCards.Count; i-->0;)
         { 
             switch (useCards[i])
             {
@@ -153,6 +155,9 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
+
+        Debug.Log("return");
+        return;
     }
 
     private void Update()

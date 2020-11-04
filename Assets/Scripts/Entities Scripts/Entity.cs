@@ -54,6 +54,8 @@ public class Entity : MonoBehaviour
     {
         if (_WalkingPath.Count != 0)
             CheckPath();
+
+        //gameObject.AddComponent<Bonus_Faster>();
     }
 
     // Update is called once per frame
