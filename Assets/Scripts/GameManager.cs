@@ -42,8 +42,21 @@ public class GameManager : MonoBehaviour
     // path
     public List<GameObject> path;
 
+    public bool pause;
+
+    public static GameManager instance;
+
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         nbPlayer = GameData.nbPlayer;
     }
 
@@ -160,8 +173,31 @@ public class GameManager : MonoBehaviour
         return;
     }
 
+    public void ChangePauseBool(bool newValue)
+    {
+        pause = newValue;
+        if(pause)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+
     private void Update()
     {
+        for(int i = players.Length; i-- > 0;)
+        {
+            if(players[i].GetButtonDown("Menu"))
+            {
+                ChangePauseBool(!pause);
+            }
+        }
+
+        if(pause) { return; }
+
         for (int i = players.Length; i-->0;)
         {
             if (!playerChois[i])
