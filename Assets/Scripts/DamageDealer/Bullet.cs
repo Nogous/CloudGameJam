@@ -2,21 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BulletType{
-    Classic,
-    Laser,
-}
-
-
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] [ReadOnly] private int _Damage;
-    [SerializeField] [ReadOnly] private GameObject _Target;
+    [SerializeField] [ReadOnly] protected int _Damage;
+    [SerializeField] [ReadOnly] protected GameObject _Target;
     private float _TimeToReachTarget;
     private Vector3 _StartPosition;
     private float ratio;
     public AnimationCurve _AnimCurve;
-    public BulletType bulletType;
+    public DamageDealerType damageDealerType = DamageDealerType.Bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -49,7 +43,7 @@ public class Bullet : MonoBehaviour
 
             if (_Entity.entitiesStats._Type == EntitiesStats.Type.Robot)
             {
-                collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, bulletType);
+                collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType);
                 Destroy(this.gameObject, 0.1f);
             }
         }

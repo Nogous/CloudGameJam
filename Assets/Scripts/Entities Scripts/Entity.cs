@@ -118,13 +118,13 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage, BulletType bulletType)
+    public void TakeDamage(int damage, DamageDealerType bulletType)
     {
-        if (shield == 1 && bulletType == BulletType.Classic)
+        if (shield == 1 && bulletType == DamageDealerType.Bullet)
         {
             this._CurrentHealth -= (int)(damage/2);
         }
-        else if(shield == 2 && bulletType == BulletType.Classic)
+        else if(shield == 2 && bulletType == DamageDealerType.Bullet)
         {
             this._CurrentHealth -= 0;
         }
