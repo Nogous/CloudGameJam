@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Linq;
 
 [System.Serializable]
 public class PlayerHand{
@@ -213,12 +214,12 @@ public class GameManager : MonoBehaviour
         return null;
     }
 
-    public void AnimationUseCardOnNewRobot(int idPlayer, int idCard)
+    public void AnimationUseCardOnNewRobot(int idPlayer, int idCard, Card type)
     {
 
         if (robots.GetValue(0) == null)
         {
-            playerActivationImage[idPlayer].card0.sprite = GetSprite(useCards[idPlayer]);
+            playerActivationImage[idPlayer].card0.sprite = GetSprite(type);
             Vector2 pos = playerActivationImage[idPlayer].card0.rectTransform.anchoredPosition;
             switch (idCard)
             {
@@ -241,7 +242,7 @@ public class GameManager : MonoBehaviour
         }
         else if (robots.GetValue(1) == null)
         {
-            playerActivationImage[idPlayer].card1.sprite = GetSprite(useCards[idPlayer]);
+            playerActivationImage[idPlayer].card1.sprite = GetSprite(type);
             Vector2 pos = playerActivationImage[idPlayer].card1.rectTransform.anchoredPosition;
             switch (idCard)
             {
@@ -264,7 +265,7 @@ public class GameManager : MonoBehaviour
         }
         else if (robots.GetValue(2) == null)
         {
-            playerActivationImage[idPlayer].card2.sprite = GetSprite(useCards[idPlayer]);
+            playerActivationImage[idPlayer].card2.sprite = GetSprite(type);
             Vector2 pos = playerActivationImage[idPlayer].card2.rectTransform.anchoredPosition;
             switch (idCard)
             {
@@ -287,7 +288,7 @@ public class GameManager : MonoBehaviour
         }
         else if (robots.GetValue(3) == null)
         {
-            playerActivationImage[idPlayer].card3.sprite = GetSprite(useCards[idPlayer]);
+            playerActivationImage[idPlayer].card3.sprite = GetSprite(type);
             Vector2 pos = playerActivationImage[idPlayer].card3.rectTransform.anchoredPosition;
             switch (idCard)
             {
@@ -321,7 +322,7 @@ public class GameManager : MonoBehaviour
             UpdateUI();
             useCards.Add(tmpCard);
 
-            AnimationUseCardOnNewRobot(idPlayer, idCard);
+            AnimationUseCardOnNewRobot(idPlayer, idCard, tmpCard);
 
             return tmpCard;
         }
@@ -400,6 +401,8 @@ public class GameManager : MonoBehaviour
 
             if (!playerChois[i])
             {
+                if (robots[robots.Length-1] != null) return;
+
                 if (players[i].GetButtonDown("X") && playerHands[i].card[0] != Card.None)
                 {
                     UseCard(i, 0);

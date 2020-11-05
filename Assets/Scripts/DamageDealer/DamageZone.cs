@@ -26,7 +26,6 @@ public class DamageZone : MonoBehaviour
                 else
                 {
                     item.TakeDamage(damage, damageDealerType);
-                    Debug.Log("hit");
                 }
             }
             dpsDuration = 1/dps;
