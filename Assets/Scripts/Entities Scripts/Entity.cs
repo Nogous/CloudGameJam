@@ -89,7 +89,7 @@ public class Entity : MonoBehaviour
     {
         if (_EnnemyEntities.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Tour)
         {
-            if (_EnnemyEntities[0]._CurrentHealth <= 0)
+            if (_EnnemyEntities[0]._CurrentHealth <= 0 && _EnnemyEntities[0] == null)
             {
                 _EnnemyEntities.Remove(_EnnemyEntities[0]);
             }
