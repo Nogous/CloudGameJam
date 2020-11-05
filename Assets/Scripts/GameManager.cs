@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 [System.Serializable]
 public class PlayerHand{
@@ -15,6 +16,15 @@ public class PlayerHandImage{
     public Image card0;
     public Image card1;
     public Image card2;
+}
+
+[System.Serializable]
+public class PlayerActivationImage
+{
+    public Image card0;
+    public Image card1;
+    public Image card2;
+    public Image card3;
 }
 
 public class GameManager : MonoBehaviour
@@ -29,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     // UI
     public PlayerHandImage[] playerHandsImage;
+
+    public PlayerActivationImage[] playerActivationImage;
 
     // Prefabs
     public GameObject robotPrefab;
@@ -84,6 +96,11 @@ public class GameManager : MonoBehaviour
             playerHands[i] = new PlayerHand();
             playerHands[i] = new PlayerHand();
             playerHands[i] = new PlayerHand();
+
+            playerActivationImage[i].card0.color = new Color(255, 255, 255, 0f);
+            playerActivationImage[i].card1.color = new Color(255, 255, 255, 0f);
+            playerActivationImage[i].card2.color = new Color(255, 255, 255, 0f);
+            playerActivationImage[i].card3.color = new Color(255, 255, 255, 0f);
         }
         deck.Init();
         DistributeCards();
@@ -104,13 +121,77 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < nbPlayer; i++)
         {
-            playerHandsImage[i].card0.sprite = GetSprtite(playerHands[i].card[0]);
-            playerHandsImage[i].card1.sprite = GetSprtite(playerHands[i].card[1]);
-            playerHandsImage[i].card2.sprite = GetSprtite(playerHands[i].card[2]);
+            playerHandsImage[i].card0.sprite = GetSprite(playerHands[i].card[0]);
+            playerHandsImage[i].card1.sprite = GetSprite(playerHands[i].card[1]);
+            playerHandsImage[i].card2.sprite = GetSprite(playerHands[i].card[2]);
+
+            if (i == nbPlayer - 1)
+            {
+                switch (nbPlayer)
+                {
+                    case 2:
+                        if ((playerHands[i - i].card[0] != Card.None && playerHands[i - i].card[1] != Card.None && playerHands[i - i].card[2] != Card.None))
+                        {
+                            for (int z = 0; z < nbPlayer; z++)
+                            {
+                                playerHandsImage[z].card0.color = new Color(255, 255, 255, 1f);
+                                playerHandsImage[z].card1.color = new Color(255, 255, 255, 1f);
+                                playerHandsImage[z].card2.color = new Color(255, 255, 255, 1f);
+                            }
+                        }
+                        break;
+                    case 3:
+                        if ((playerHands[i - i].card[0] != Card.None && playerHands[i - i].card[1] != Card.None && playerHands[i - i].card[2] != Card.None) && (playerHands[i - i + 1].card[0] != Card.None && playerHands[i - i + 1].card[1] != Card.None && playerHands[i - i + 1].card[2] != Card.None))
+                        {
+                            for (int z = 0; z < nbPlayer; z++)
+                            {
+                                playerHandsImage[z].card0.color = new Color(255, 255, 255, 1f);
+                                playerHandsImage[z].card1.color = new Color(255, 255, 255, 1f);
+                                playerHandsImage[z].card2.color = new Color(255, 255, 255, 1f);
+                            }
+                        }
+                        break;
+                    case 4:
+                        if ((playerHands[i - i].card[0] != Card.None && playerHands[i - i].card[1] != Card.None && playerHands[i - i].card[2] != Card.None) && (playerHands[i - i + 1].card[0] != Card.None && playerHands[i - i + 1].card[1] != Card.None && playerHands[i - i + 1].card[2] != Card.None) && (playerHands[i - i + 2].card[0] != Card.None && playerHands[i - i + 2].card[1] != Card.None && playerHands[i - i + 2].card[2] != Card.None))
+                        {
+                            for (int z = 0; z < nbPlayer; z++)
+                            {
+                                playerHandsImage[z].card0.color = new Color(255, 255, 255, 1f);
+                                playerHandsImage[z].card1.color = new Color(255, 255, 255, 1f);
+                                playerHandsImage[z].card2.color = new Color(255, 255, 255, 1f);
+                            }
+                        }
+                        break;
+                }
+            }
         }
     }
 
-    private Sprite GetSprtite(Card type)
+    private void TakeCardAndUpdateUIAfterEmptyHand(int player)
+    {
+
+        playerHands[player].card[0] = deck.TakeCard();
+        playerHands[player].card[1] = deck.TakeCard();
+        playerHands[player].card[2] = deck.TakeCard();
+
+        playerHandsImage[player].card0.sprite = GetSprite(playerHands[player].card[0]);
+        playerHandsImage[player].card1.sprite = GetSprite(playerHands[player].card[1]);
+        playerHandsImage[player].card2.sprite = GetSprite(playerHands[player].card[2]);
+
+        playerHandsImage[player].card0.color = new Color(155, 155, 155, 0.4f);
+        playerHandsImage[player].card1.color = new Color(155, 155, 155, 0.4f);
+        playerHandsImage[player].card2.color = new Color(155, 155, 155, 0.4f);
+
+        if (player == nbPlayer - 1)
+        {
+            UpdateUI();
+            playerHandsImage[player].card0.color = new Color(255, 255, 255, 1f);
+            playerHandsImage[player].card1.color = new Color(255, 255, 255, 1f);
+            playerHandsImage[player].card2.color = new Color(255, 255, 255, 1f);
+        }
+    }
+
+    private Sprite GetSprite(Card type)
     {
         switch (type)
         {
@@ -126,19 +207,126 @@ public class GameManager : MonoBehaviour
                 return Resources.Load<Sprite>("Sprites/Laser");
             case Card.Speed:
                 return Resources.Load<Sprite>("Sprites/Speed");
+            case Card.None:
+                return Resources.Load<Sprite>("Sprites/Clear");
         }
         return null;
     }
 
+    public void AnimationUseCardOnNewRobot(int idPlayer, int idCard)
+    {
+
+        if (robots.GetValue(0) == null)
+        {
+            playerActivationImage[idPlayer].card0.sprite = GetSprite(useCards[idPlayer]);
+            Vector2 pos = playerActivationImage[idPlayer].card0.rectTransform.anchoredPosition;
+            switch (idCard)
+            {
+                case 0:
+                    playerActivationImage[idPlayer].card0.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card0.rectTransform.anchoredPosition;
+                    break;
+
+                case 1:
+                    playerActivationImage[idPlayer].card0.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card1.rectTransform.anchoredPosition;
+                    break;
+
+                case 2:
+                    playerActivationImage[idPlayer].card0.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card2.rectTransform.anchoredPosition;
+                    break;
+            }
+            playerActivationImage[idPlayer].card0.rectTransform.DOAnchorPos(pos, 0.7f)
+                .OnStart(() => {
+                    playerActivationImage[idPlayer].card0.color = new Color(255, 255, 255, 1f);
+                });
+        }
+        else if (robots.GetValue(1) == null)
+        {
+            playerActivationImage[idPlayer].card1.sprite = GetSprite(useCards[idPlayer]);
+            Vector2 pos = playerActivationImage[idPlayer].card1.rectTransform.anchoredPosition;
+            switch (idCard)
+            {
+                case 0:
+                    playerActivationImage[idPlayer].card1.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card0.rectTransform.anchoredPosition;
+                    break;
+
+                case 1:
+                    playerActivationImage[idPlayer].card1.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card1.rectTransform.anchoredPosition;
+                    break;
+
+                case 2:
+                    playerActivationImage[idPlayer].card1.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card2.rectTransform.anchoredPosition;
+                    break;
+            }
+            playerActivationImage[idPlayer].card1.rectTransform.DOAnchorPos(pos, 0.7f)
+                .OnStart(() => {
+                    playerActivationImage[idPlayer].card1.color = new Color(255, 255, 255, 1f);
+                });
+        }
+        else if (robots.GetValue(2) == null)
+        {
+            playerActivationImage[idPlayer].card2.sprite = GetSprite(useCards[idPlayer]);
+            Vector2 pos = playerActivationImage[idPlayer].card2.rectTransform.anchoredPosition;
+            switch (idCard)
+            {
+                case 0:
+                    playerActivationImage[idPlayer].card2.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card0.rectTransform.anchoredPosition;
+                    break;
+
+                case 1:
+                    playerActivationImage[idPlayer].card2.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card1.rectTransform.anchoredPosition;
+                    break;
+
+                case 2:
+                    playerActivationImage[idPlayer].card2.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card2.rectTransform.anchoredPosition;
+                    break;
+            }
+            playerActivationImage[idPlayer].card2.rectTransform.DOAnchorPos(pos, 0.7f)
+                .OnStart(() => {
+                    playerActivationImage[idPlayer].card2.color = new Color(255, 255, 255, 1f);
+                });
+        }
+        else if (robots.GetValue(3) == null)
+        {
+            playerActivationImage[idPlayer].card3.sprite = GetSprite(useCards[idPlayer]);
+            Vector2 pos = playerActivationImage[idPlayer].card3.rectTransform.anchoredPosition;
+            switch (idCard)
+            {
+                case 0:
+                    playerActivationImage[idPlayer].card3.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card0.rectTransform.anchoredPosition;
+                    break;
+
+                case 1:
+                    playerActivationImage[idPlayer].card3.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card1.rectTransform.anchoredPosition;
+                    break;
+
+                case 2:
+                    playerActivationImage[idPlayer].card3.rectTransform.anchoredPosition = playerHandsImage[idPlayer].card2.rectTransform.anchoredPosition;
+                    break;
+            }
+            playerActivationImage[idPlayer].card3.rectTransform.DOAnchorPos(pos, 0.7f)
+                .OnStart(() => {
+                    playerActivationImage[idPlayer].card3.color = new Color(255, 255, 255, 1f);
+                });
+        }
+    }
+
     public Card UseCard(int idPlayer, int idCard)
     {
-        Card tmpCard = playerHands[idPlayer].card[idCard];
-        deck.AddDiscardCard(tmpCard);
-        playerHands[idPlayer].card[idCard] = deck.TakeCard();
-        UpdateUI();
-        useCards.Add(tmpCard);
+        if (playerHands[idPlayer].card[idCard] != Card.None)
+        {
+            Card tmpCard = playerHands[idPlayer].card[idCard];
+            deck.AddDiscardCard(tmpCard);
+            playerHands[idPlayer].card[idCard] = Card.None;
 
-        return tmpCard;
+            UpdateUI();
+            useCards.Add(tmpCard);
+
+            AnimationUseCardOnNewRobot(idPlayer, idCard);
+
+            return tmpCard;
+        }
+
+        return playerHands[idPlayer].card[idCard];
     }
 
     public void CreateRobot()
@@ -171,6 +359,7 @@ public class GameManager : MonoBehaviour
                 default:
                     break;
             }
+
         }
 
         for (int i = 0; i < robots.Length; i++)
@@ -202,43 +391,53 @@ public class GameManager : MonoBehaviour
 
         if(pause) { return; }
 
-        for (int i = players.Length; i-->0;)
+        for (int i = players.Length; i-- > 0;)
         {
+            if (playerHands[i].card[0] == Card.None && playerHands[i].card[1] == Card.None && playerHands[i].card[2] == Card.None)
+            {
+                TakeCardAndUpdateUIAfterEmptyHand(i);
+            }
+
             if (!playerChois[i])
             {
-                if (players[i].GetButtonDown("X"))
+                if (players[i].GetButtonDown("X") && playerHands[i].card[0] != Card.None)
                 {
                     UseCard(i, 0);
                     playerChois[i] = true;
                 }
-                else if (players[i].GetButtonDown("Y"))
+                else if (players[i].GetButtonDown("Y") && playerHands[i].card[1] != Card.None)
                 {
                     UseCard(i, 1);
                     playerChois[i] = true;
                 }
-                else if (players[i].GetButtonDown("B"))
+                else if (players[i].GetButtonDown("B") && playerHands[i].card[2] != Card.None)
                 {
                     UseCard(i, 2);
                     playerChois[i] = true;
                 }
             }
 
-            if (players[i].GetButtonDown("ActiveRobot1") && robots[0]!= null)
+            if (players[i].GetButtonDown("ActiveRobot1") && robots[0] != null)
             {
                 robots[0]._BonusPlayer[i].ActiveBonus();
+                playerActivationImage[i].card0.color = new Color(155, 155, 155, 0.4f);
             }
             if (players[i].GetButtonDown("ActiveRobot2") && robots[1] != null)
             {
                 robots[1]._BonusPlayer[i].ActiveBonus();
+                playerActivationImage[i].card1.color = new Color(155, 155, 155, 0.4f);
             }
             if (players[i].GetButtonDown("ActiveRobot3") && robots[2] != null)
             {
                 robots[2]._BonusPlayer[i].ActiveBonus();
+                playerActivationImage[i].card2.color = new Color(155, 155, 155, 0.4f);
             }
             if (players[i].GetButtonDown("ActiveRobot4") && robots[3] != null)
             {
                 robots[3]._BonusPlayer[i].ActiveBonus();
+                playerActivationImage[i].card3.color = new Color(155, 155, 155, 0.4f);
             }
+
         }
 
         for (int i = 0; i < nbPlayer; i++)

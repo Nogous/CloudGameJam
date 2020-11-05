@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public enum Card
 {
+    None,
     Shield,
     Bomb,
     Giant,
