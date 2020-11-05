@@ -53,6 +53,9 @@ public class Entity : MonoBehaviour
     public Image healthBar;
     public Billboard billboard;
 
+    // tower
+    [SerializeField] private Transform canon;
+
     private void Awake()
     {
         maxHealth = entitiesStats._HealthBase ;
@@ -109,7 +112,7 @@ public class Entity : MonoBehaviour
             {
                 _CooldownHit = _CurrentAttackSpeed;
 
-                GameObject go = Instantiate(_BulletPrefab, this.gameObject.transform.position, Quaternion.identity);
+                GameObject go = Instantiate(_BulletPrefab, canon.position, Quaternion.identity);
                 go.name = _BulletPrefab.name;
                 go.GetComponent<Bullet>().SetDefaultVariable(_CurrentDamage, _EnnemyEntities[0].gameObject, _CurrentAttackSpeed);
 
