@@ -198,7 +198,7 @@ public class Entity : MonoBehaviour
             {
                 if (_BonusPlayer[z] != null)
                 {
-                    if (_BonusPlayer[z].type == BonusType.Giant)
+                    if (_BonusPlayer[z].type == BonusType.Giant && _BonusPlayer[z].isActive)
                         i++;
                 }
             }
@@ -207,7 +207,7 @@ public class Entity : MonoBehaviour
                 Debug.Log("Damage Deal !");
                 this._CurrentHealth -= (int)(damage);
             }
-            else if (i == 0)
+            else if (i == 1)
             {
                 Debug.Log("Damage Deal and get destroyed!");
                 this._CurrentHealth -= (int)(damage);
