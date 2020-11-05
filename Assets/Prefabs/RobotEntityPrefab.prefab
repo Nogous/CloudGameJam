@@ -109,28 +109,30 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
+      time: -0.033332825
+      value: -0.023590088
+      inSlope: 0.987233
+      outSlope: 0.987233
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.33333334
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
+      time: 1.0249939
+      value: 1.021225
+      inSlope: 0.987233
+      outSlope: 0.987233
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.33333334
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   _EnnemyEntities: []
   _BulletPrefab: {fileID: 0}
+  _StartPosition: {x: 0, y: 0, z: 0}
+  _CurrentNextPositionPath: {x: 0, y: 0, z: 0}
   _BonusPlayer:
   - {fileID: 0}
   - {fileID: 0}
@@ -232,6 +234,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f2b7cc27cfc7d1345a1c356f237c7c09,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4170e36e096c23443af7ed07fc4454fd, type: 2}
     - target: {fileID: 919132149155446097, guid: f2b7cc27cfc7d1345a1c356f237c7c09,
         type: 3}
       propertyPath: m_Name
@@ -322,6 +329,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2d5269dd515443941ad9f39a7ec95de5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9ed22f2cb9e32f949a634f1c112e9ff5, type: 2}
     - target: {fileID: 919132149155446097, guid: 2d5269dd515443941ad9f39a7ec95de5,
         type: 3}
       propertyPath: m_Name
@@ -412,6 +424,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 427669260717b044fa950fd2cb70dc8c,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5eaa81946da703a47a0124a5d6a035f0, type: 2}
     - target: {fileID: 919132149155446097, guid: 427669260717b044fa950fd2cb70dc8c,
         type: 3}
       propertyPath: m_Name
@@ -502,6 +519,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0a3626660cd3edd47ae316dd0bd6568e,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8999b247b84aefc4284d34a0203213cf, type: 2}
     - target: {fileID: 919132149155446097, guid: 0a3626660cd3edd47ae316dd0bd6568e,
         type: 3}
       propertyPath: m_Name
@@ -682,6 +704,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ed74fd43d75002c42a343cf6a4b82b42,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b5f1d3c962ab0894b8fa456fba1ecd83, type: 2}
     - target: {fileID: 919132149155446097, guid: ed74fd43d75002c42a343cf6a4b82b42,
         type: 3}
       propertyPath: m_Name
