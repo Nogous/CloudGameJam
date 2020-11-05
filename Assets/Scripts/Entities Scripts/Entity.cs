@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Entity : MonoBehaviour
@@ -44,6 +45,8 @@ public class Entity : MonoBehaviour
     private float curentJump = 0f;
     public float jumpSpeed = 1f;
 
+    private bool isMoving = true;
+
     private void Awake()
     {
         _CurrentHealth = entitiesStats._HealthBase ;
@@ -67,6 +70,8 @@ public class Entity : MonoBehaviour
             CheckPath();
 
         initScale = gameObject.transform.localScale;
+        if (_WalkingPath.Count!= 0)
+        _CurrentNextPositionPath = _WalkingPath[0].transform.position;
     }
 
     // Update is called once per frame
@@ -203,8 +208,29 @@ public class Entity : MonoBehaviour
 
     void Movement()
     {
+        if (!isMoving) return;
+
         if (_WalkingPath.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Robot)
         {
+            transform.position += (_CurrentNextPositionPath - transform.position).normalized * _CurrentMovementSpeed * Time.deltaTime * 2;
+
+            if ((_CurrentNextPositionPath - transform.position).magnitude <= 0.1f)
+            {
+                _CurrentObjectID++;
+                if (_WalkingPath.Count > _CurrentObjectID)
+                {
+                    Debug.Log(_CurrentObjectID +"/"+ _WalkingPath.Count);
+                    _CurrentNextPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
+                    transform.forward = _CurrentNextPositionPath - transform.position;
+                }
+                else
+                {
+                    Death();
+                }
+            }
+
+            /*
+            Debug.Log(_StartPosition +" ; "+  _CurrentNextPositionPath);
             _CurrentPos += Time.deltaTime * _CurrentMovementSpeed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
 
 
@@ -213,12 +239,13 @@ public class Entity : MonoBehaviour
             {
                 _CurrentObjectID++;
                 CheckPath();
-            }
+            }*/
         }
     }
 
     public void Death()
     {
+        isMoving = true;
         Destroy(this.gameObject, 0.1f);
     }
 
