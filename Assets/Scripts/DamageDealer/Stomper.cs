@@ -14,12 +14,14 @@ public class Stomper : MonoBehaviour
     public float cooldown = 7;
     private float cooldownRef;
     private Tween tween;
+    public GameObject VFX;
 
     // Start is called before the first frame update
     void Start()
     {
         cooldownRef = cooldown;
         StartStomp();
+        VFX.SetActive(false);
     }
 
     // Update is called once per frame
@@ -47,11 +49,15 @@ public class Stomper : MonoBehaviour
         tween = this.transform.DOMoveY(_StartStompY, 1f)
         .OnComplete(() =>{
             tween = this.transform.DOMoveY(_EndStompY, 0.5f)
-            .OnComplete(() =>{
+            .OnComplete(() => {
+                VFX.SetActive(true);
+                this.gameObject.GetComponent<BoxCollider>().enabled = false;
                 tween = this.transform.DOMoveY(_StartPositionY, 1.5f)
                 .OnComplete(() => {
+                    this.gameObject.GetComponent<BoxCollider>().enabled = true;
                     cooldown = cooldownRef;
                     startCooldown = true;
+                    VFX.SetActive(false);
                 });
             });
         });
