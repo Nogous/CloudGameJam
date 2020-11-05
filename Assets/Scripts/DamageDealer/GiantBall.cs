@@ -84,34 +84,7 @@ public class GiantBall : MonoBehaviour
 
             if (_Entity.entitiesStats._Type == EntitiesStats.Type.Robot)
             {
-                int i = 0;
-
-                for(int z = 0; z < _Entity._BonusPlayer.Length; z++)
-                {
-                    if(_Entity._BonusPlayer[z] != null)
-                    {
-                        if(_Entity._BonusPlayer[z].type == BonusType.Giant)
-                            i++;
-                    }
-                }
-                if (i == 1)
-                {
-                    Debug.Log("Damage Deal and get destroyed!");
-                    collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType, this.gameObject);
-                    Destroy(this.gameObject, 0.1f);
-                }
-                else if (i == 0)
-                {
-                    Debug.Log("Damage Deal !");
-                    collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType);
-                }
-                else
-                {
-                    Debug.Log("Damage don't deal and get destroyed !");
-                    Destroy(this.gameObject, 0.1f);
-                }
-
-
+                collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType, this.gameObject);
             }
         }
     }
