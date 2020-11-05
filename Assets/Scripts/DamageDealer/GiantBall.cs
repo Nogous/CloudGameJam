@@ -8,7 +8,7 @@ public class GiantBall : MonoBehaviour
     public float _TimeToReachTarget;
     private Vector3 _StartPosition;
     private float ratio;
-    public DamageDealerType damageDealerType = DamageDealerType.Bullet;
+    [ReadOnly] public DamageDealerType damageDealerType = DamageDealerType.GiantBall;
 
     [Header("Path")]
     public List<GameObject> _WalkingPath;
@@ -97,7 +97,7 @@ public class GiantBall : MonoBehaviour
                 if (i == 1)
                 {
                     Debug.Log("Damage Deal and get destroyed!");
-                    collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType);
+                    collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType, this.gameObject);
                     Destroy(this.gameObject, 0.1f);
                 }
                 else if (i == 0)

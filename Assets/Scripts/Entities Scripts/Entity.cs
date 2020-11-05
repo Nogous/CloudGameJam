@@ -173,17 +173,55 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage, DamageDealerType bulletType)
+    public void TakeDamage(int damage, DamageDealerType bulletType, GameObject damageDealerObject = null)
     {
-        if (shield == 1 && bulletType == DamageDealerType.Bullet)
+        if (bulletType == DamageDealerType.Bullet)
         {
-            this._CurrentHealth -= (int)(damage/2);
+            if (shield == 1 )
+            {
+                this._CurrentHealth -= (int)(damage / 2);
+            }
+            else if (shield == 2)
+            {
+                this._CurrentHealth -= 0;
+            }
+            else
+            {
+                this._CurrentHealth -= (int)(damage);
+            }
         }
-        else if(shield == 2 && bulletType == DamageDealerType.Bullet)
+        else if(bulletType == DamageDealerType.GiantBall)
         {
-            this._CurrentHealth -= 0;
+            int i = 0;
+
+            for (int z = 0; z < _BonusPlayer.Length; z++)
+            {
+                if (_BonusPlayer[z] != null)
+                {
+                    if (_BonusPlayer[z].type == BonusType.Giant)
+                        i++;
+                }
+            }
+            if (i == 0)
+            {
+                Debug.Log("Damage Deal !");
+                this._CurrentHealth -= (int)(damage);
+            }
+            else if (i == 0)
+            {
+                Debug.Log("Damage Deal and get destroyed!");
+                this._CurrentHealth -= (int)(damage);
+                if (damageDealerObject != null)
+                    Destroy(damageDealerObject, 0.1f);
+            }
+            else
+            {
+                Debug.Log("Damage don't deal and get destroyed !");
+                if (damageDealerObject != null)
+                    Destroy(damageDealerObject, 0.1f);
+            }
         }
-        else
+        else if(bulletType == DamageDealerType.Stomper)
         {
             this._CurrentHealth -= (int)(damage);
         }
@@ -219,7 +257,7 @@ public class Entity : MonoBehaviour
                 _CurrentObjectID++;
                 if (_WalkingPath.Count > _CurrentObjectID)
                 {
-                    Debug.Log(_CurrentObjectID +"/"+ _WalkingPath.Count);
+                    //Debug.Log(_CurrentObjectID +"/"+ _WalkingPath.Count);
                     _CurrentNextPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
                     transform.forward = _CurrentNextPositionPath - transform.position;
                 }
