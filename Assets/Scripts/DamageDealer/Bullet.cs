@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     private Vector3 _StartPosition;
     private float ratio;
     public AnimationCurve _AnimCurve;
-    public DamageDealerType damageDealerType = DamageDealerType.Bullet;
+    [ReadOnly] public DamageDealerType damageDealerType = DamageDealerType.Bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -24,8 +24,11 @@ public class Bullet : MonoBehaviour
         if (GameManager.instance.pause) { return; }
 
         ratio += Time.deltaTime / _TimeToReachTarget;
+        
+        if (_Target == null)
+        { Destroy(this.gameObject); }
 
-        this.transform.position = Vector3.Lerp(_StartPosition, _Target.transform.position, ratio < 1 ? _AnimCurve.Evaluate(ratio) : ratio);
+        this.transform.position = Vector3.Lerp(_StartPosition, _Target != null ? _Target.transform.position : this.transform.position, ratio < 1 ? _AnimCurve.Evaluate(ratio) : ratio);
     }
 
     public void SetDefaultVariable(int damage, GameObject target, float time)
