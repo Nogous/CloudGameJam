@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class Entity : MonoBehaviour
 
     [Header("Current Stats")]
     //Stats Actual on this Entity
-    [ReadOnly] public int _CurrentHealth = 0;
+    [ReadOnly] public int health = 0;
     [ReadOnly] public int _CurrentDamage = 0;
     [ReadOnly] public float _CurrentMovementSpeed = 0;
     [ReadOnly] public float _CurrentAttackSpeed = 0;
@@ -46,10 +47,16 @@ public class Entity : MonoBehaviour
     public float jumpSpeed = 1f;
 
     private bool isMoving = true;
+    
+    // health
+    private int maxHealth = 0;
+    public Image healthBar;
+    public Billboard billboard;
 
     private void Awake()
     {
-        _CurrentHealth = entitiesStats._HealthBase ;
+        maxHealth = entitiesStats._HealthBase ;
+        health = entitiesStats._HealthBase ;
         _CurrentDamage = entitiesStats._DamageBase ;
         _CurrentMovementSpeed = entitiesStats._MovementSpeedBase;
         _CurrentAttackSpeed = entitiesStats._AttackSpeedBase;
@@ -89,7 +96,7 @@ public class Entity : MonoBehaviour
     {
         if (_EnnemyEntities.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Tour)
         {
-            if (_EnnemyEntities[0]._CurrentHealth <= 0 && _EnnemyEntities[0] == null)
+            if (_EnnemyEntities[0].health <= 0 && _EnnemyEntities[0] == null)
             {
                 _EnnemyEntities.Remove(_EnnemyEntities[0]);
             }
@@ -106,7 +113,7 @@ public class Entity : MonoBehaviour
                 go.name = _BulletPrefab.name;
                 go.GetComponent<Bullet>().SetDefaultVariable(_CurrentDamage, _EnnemyEntities[0].gameObject, _CurrentAttackSpeed);
 
-                if (_EnnemyEntities[0]._CurrentHealth -_CurrentDamage <= 0)
+                if (_EnnemyEntities[0].health -_CurrentDamage <= 0)
                 {
                     _EnnemyEntities.Remove(_EnnemyEntities[0]);
                 }
@@ -179,15 +186,15 @@ public class Entity : MonoBehaviour
         {
             if (shield == 1 )
             {
-                this._CurrentHealth -= (int)(damage / 2);
+                this.health -= (int)(damage / 2);
             }
             else if (shield == 2)
             {
-                this._CurrentHealth -= 0;
+                this.health -= 0;
             }
             else
             {
-                this._CurrentHealth -= (int)(damage);
+                this.health -= (int)(damage);
             }
         }
         else if(bulletType == DamageDealerType.GiantBall)
@@ -198,19 +205,19 @@ public class Entity : MonoBehaviour
             {
                 if (_BonusPlayer[z] != null)
                 {
-                    if (_BonusPlayer[z].type == BonusType.Giant)
+                    if (_BonusPlayer[z].type == BonusType.Giant && _BonusPlayer[z].isActive)
                         i++;
                 }
             }
             if (i == 0)
             {
                 Debug.Log("Damage Deal !");
-                this._CurrentHealth -= (int)(damage);
+                this.health -= (int)(damage);
             }
-            else if (i == 0)
+            else if (i == 1)
             {
                 Debug.Log("Damage Deal and get destroyed!");
-                this._CurrentHealth -= (int)(damage);
+                this.health -= (int)(damage);
                 if (damageDealerObject != null)
                     Destroy(damageDealerObject, 0.1f);
             }
@@ -221,15 +228,18 @@ public class Entity : MonoBehaviour
                     Destroy(damageDealerObject, 0.1f);
             }
         }
-        else if(bulletType == DamageDealerType.Stomper)
+        else
         {
-            this._CurrentHealth -= (int)(damage);
+            this.health -= (int)(damage);
         }
 
-        if (_CurrentHealth <= 0)
+        healthBar.fillAmount = (float)health / (float)maxHealth;
+
+        if (health <= 0)
         {
             Death();
         }
+
     }
 
     void CheckPath()
