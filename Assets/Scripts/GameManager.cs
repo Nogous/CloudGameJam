@@ -19,6 +19,8 @@ public class PlayerHandImage{
 
 public class GameManager : MonoBehaviour
 {
+    public Camera cam;
+
     public int nbPlayer = 4;
 
     public Deck deck = new Deck();
@@ -143,6 +145,7 @@ public class GameManager : MonoBehaviour
     {
         Entity tmpRobot = Instantiate(robotPrefab, path[0].transform.position, Quaternion.identity).GetComponent<Entity>();
 
+        tmpRobot.billboard.cam = cam.transform;
         tmpRobot._WalkingPath = path;
 
         for (int i = useCards.Count; i-->0;)
