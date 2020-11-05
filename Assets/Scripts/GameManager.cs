@@ -29,7 +29,6 @@ public class GameManager : MonoBehaviour
     public PlayerHandImage[] playerHandsImage;
 
     // Prefabs
-    public Transform robotFactoryPos;
     public GameObject robotPrefab;
 
     // rewired
@@ -142,7 +141,7 @@ public class GameManager : MonoBehaviour
 
     public void CreateRobot()
     {
-        Entity tmpRobot = Instantiate(robotPrefab, robotFactoryPos.position, Quaternion.identity).GetComponent<Entity>();
+        Entity tmpRobot = Instantiate(robotPrefab, path[0].transform.position, Quaternion.identity).GetComponent<Entity>();
 
         tmpRobot._WalkingPath = path;
 

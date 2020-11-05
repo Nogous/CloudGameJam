@@ -194,6 +194,11 @@ public class Entity : MonoBehaviour
         _CurrentPos = 0;
         _StartPosition = this.transform.position;
         _CurrentNextPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
+
+        Vector3 difference = _CurrentNextPositionPath - transform.position;
+        difference.Normalize();
+        float rotationY = Mathf.Atan2(difference.z, difference.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, rotationY, 0f);
     }
 
     void Movement()
