@@ -221,7 +221,7 @@ public class Entity : MonoBehaviour
                     Destroy(damageDealerObject, 0.1f);
             }
         }
-        else if(bulletType == DamageDealerType.Stomper)
+        else
         {
             this._CurrentHealth -= (int)(damage);
         }
