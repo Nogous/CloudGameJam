@@ -2875,6 +2875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88d69d64db1e35343a0e531d00159078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 0}
   nbPlayer: 2
   playerHands: []
   playerHandsImage:
@@ -2895,22 +2896,22 @@ MonoBehaviour:
     card1: {fileID: 1712732569236375919}
     card2: {fileID: 1712732569603791121}
   playerActivationImage:
-  - card0: {fileID: 4873542157196662229}
-    card1: {fileID: 2930841652224307608}
-    card2: {fileID: 5123754711725329636}
-    card3: {fileID: 3545057388926828454}
-  - card0: {fileID: 8631262505187139729}
-    card1: {fileID: 802655778404031624}
-    card2: {fileID: 9004606137879823875}
-    card3: {fileID: 5500472546447377634}
-  - card0: {fileID: 5226561095699333098}
-    card1: {fileID: 5891070968193314434}
-    card2: {fileID: 5758410584147115605}
-    card3: {fileID: 5599135913681593765}
-  - card0: {fileID: 4109798148214425391}
-    card1: {fileID: 1942684072693940505}
-    card2: {fileID: 2111938990675886205}
-    card3: {fileID: 2159793166587269154}
+  - card0: {fileID: 3545057388926828454}
+    card1: {fileID: 5123754711725329636}
+    card2: {fileID: 4873542157196662229}
+    card3: {fileID: 2930841652224307608}
+  - card0: {fileID: 5500472546447377634}
+    card1: {fileID: 9004606137879823875}
+    card2: {fileID: 8631262505187139729}
+    card3: {fileID: 802655778404031624}
+  - card0: {fileID: 5599135913681593765}
+    card1: {fileID: 5758410584147115605}
+    card2: {fileID: 5226561095699333098}
+    card3: {fileID: 5891070968193314434}
+  - card0: {fileID: 2159793166587269154}
+    card1: {fileID: 2111938990675886205}
+    card2: {fileID: 4109798148214425391}
+    card3: {fileID: 1942684072693940505}
   robotPrefab: {fileID: 5883245450338863227, guid: 4167815b244c4164ab239b8c0df52be4,
     type: 3}
   path:
