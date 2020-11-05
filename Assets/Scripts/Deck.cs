@@ -37,13 +37,13 @@ public class Deck
         for (int i = 0; i < 100; i++)
         {
             cards.Add(new Card());
-            switch (Random.Range(0, 6))
+            switch (Random.Range(0, 4))
             {
                 case 0:
                     cards[i] = Card.Shield;
                     break;
                 case 1:
-                    cards[i] = Card.Bomb;
+                    cards[i] = Card.Speed;
                     break;
                 case 2:
                     cards[i] = Card.Giant;
@@ -55,7 +55,7 @@ public class Deck
                     cards[i] = Card.Laser;
                     break;
                 case 5:
-                    cards[i] = Card.Speed;
+                    cards[i] = Card.Bomb;
                     break;
             }
         }
