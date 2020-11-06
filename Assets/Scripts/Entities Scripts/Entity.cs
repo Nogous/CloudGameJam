@@ -53,6 +53,9 @@ public class Entity : MonoBehaviour
     public Image healthBar;
     public Billboard billboard;
 
+    [Header("VFX")]
+    public GameObject _prefabVFXDeath;
+
     // tower
     [SerializeField] private Transform canon;
 
@@ -297,6 +300,8 @@ public class Entity : MonoBehaviour
     public void Death()
     {
         isMoving = true;
+        GameObject go = Instantiate(_prefabVFXDeath, this.transform.position, Quaternion.identity);
+        Destroy(go, 0.5f);
         Destroy(this.gameObject, 0.1f);
     }
 

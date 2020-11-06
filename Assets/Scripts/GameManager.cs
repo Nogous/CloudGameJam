@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
 
     [ReadOnly] public bool pause;
 
+    public GameObject _prefabVFXShieldOn;
+
     public static GameManager instance;
 
     private Entity[] robots = new Entity[4];
@@ -343,6 +345,10 @@ public class GameManager : MonoBehaviour
             {
                 case Card.Shield:
                     tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Tank>();
+                    foreach (Bonus_Tank bonus in tmpRobot._BonusPlayer[i].GetComponents<Bonus_Tank>())
+                    {
+                        bonus._prefabVFXShieldOn = _prefabVFXShieldOn;
+                    }
                     break;
                 case Card.Bomb:
                     break;
