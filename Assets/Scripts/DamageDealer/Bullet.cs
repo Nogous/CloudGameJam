@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     private float ratio;
     public AnimationCurve _AnimCurve;
     [ReadOnly] public DamageDealerType damageDealerType = DamageDealerType.Bullet;
+    public GameObject _prefabVFXHit;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,7 @@ public class Bullet : MonoBehaviour
         if (_Target == null)
         { Destroy(this.gameObject); }
 
-        this.transform.position = Vector3.Lerp(_StartPosition, _Target != null ? _Target.transform.position : this.transform.position, ratio < 1 ? _AnimCurve.Evaluate(ratio) : ratio);
+        this.transform.position = Vector3.Lerp(_StartPosition, _Target != null ? _Target.transform.position + Vector3.up : this.transform.position, ratio < 1 ? _AnimCurve.Evaluate(ratio) : ratio);
     }
 
     public void SetDefaultVariable(int damage, GameObject target, float time)
@@ -47,6 +48,8 @@ public class Bullet : MonoBehaviour
             if (_Entity.entitiesStats._Type == EntitiesStats.Type.Robot)
             {
                 collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType);
+                GameObject go = Instantiate(_prefabVFXHit, this.transform.position, Quaternion.identity);
+                Destroy(go, 0.5f);
                 Destroy(this.gameObject, 0.1f);
             }
         }

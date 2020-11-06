@@ -94,6 +94,7 @@ MonoBehaviour:
   damageDealerType: 2
   cooldown: 4
   VFX: {fileID: 4966872439414775488}
+  _prefabVFXHit: {fileID: 123268, guid: 775fb3e8f5df827428272416a14d9adf, type: 3}
 --- !u!1001 &219824312726637332
 PrefabInstance:
   m_ObjectHideFlags: 0

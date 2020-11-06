@@ -135,6 +135,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   damageDealerType: 0
+  _prefabVFXHit: {fileID: 180954, guid: 13e43982d1a0a9d40909a898f9762727, type: 3}
 --- !u!1001 &4020589759319756604
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -3,7 +3,8 @@ guid: df7f922547f5a254794862e0405bc1b7
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _prefabVFXShieldOn: {fileID: 106386, guid: 831c85159903ac84399ac3c3e1d5c5ad, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
