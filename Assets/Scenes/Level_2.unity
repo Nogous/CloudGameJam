@@ -318,7 +318,6 @@ MonoBehaviour:
   jumpSpeed: 1
   healthBar: {fileID: 0}
   billboard: {fileID: 0}
-  _prefabVFXDeath: {fileID: 0}
   canon: {fileID: 0}
 --- !u!54 &49345400
 Rigidbody:
@@ -2466,10 +2465,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2057472804}
-    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
-      propertyPath: _prefabVFXShieldOn
-      value: 
-      objectReference: {fileID: 106386, guid: 831c85159903ac84399ac3c3e1d5c5ad, type: 3}
     - target: {fileID: 1712732570202822920, guid: b293c60de28b8864a893c55a6ab0a2e0,
         type: 3}
       propertyPath: m_Name
