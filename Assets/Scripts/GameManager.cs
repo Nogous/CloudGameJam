@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerHand{
@@ -63,6 +64,11 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     private Entity[] robots = new Entity[4];
+
+    public int idNextScene = 0;
+    public int idScene = 0;
+
+    private int nbRobotAlive = 4;
 
     private void Awake()
     {
@@ -473,5 +479,14 @@ public class GameManager : MonoBehaviour
         }
         CreateRobot();
         useCards.Clear();
+    }
+
+    public void RobotDeath()
+    {
+        nbRobotAlive--;
+        if (nbRobotAlive <=0)
+        {
+            SceneManager.LoadScene(idScene);
+        }
     }
 }
