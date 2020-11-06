@@ -53,10 +53,17 @@ public class Entity : MonoBehaviour
     public Image healthBar;
     public Billboard billboard;
 
-    [Header("VFX")]
+    [Header("VFX / 3D Model")]
     public GameObject _prefabVFXDeath;
+    public GameObject _armor1;
+    public GameObject _armor2;
+    public GameObject _armor4;
+    public GameObject _robotFeet;
+    public GameObject _speed1;
+    public GameObject _speed2;
 
     // tower
+    [Header("Tower")]
     [SerializeField] private Transform canon;
 
     private void Awake()
@@ -96,6 +103,7 @@ public class Entity : MonoBehaviour
 
         UpdateJump();
         UpdateScale();
+        UpdateModel();
     }
 
     void Attack()
@@ -127,6 +135,83 @@ public class Entity : MonoBehaviour
             }
         }
     }
+
+    public void UpdateModel()
+    {
+        if (entitiesStats._Type == EntitiesStats.Type.Robot)
+        {
+            if(_speed1 != null)
+            {
+                if (!_speed1.activeInHierarchy && _CurrentMovementSpeed == entitiesStats._MovementSpeedBase * 2)
+                {
+                    _speed1.SetActive(true);
+                    _robotFeet.SetActive(false);
+                }
+                else if (_speed1.activeInHierarchy && _CurrentMovementSpeed == entitiesStats._MovementSpeedBase)
+                {
+                    _speed1.SetActive(false);
+                    _robotFeet.SetActive(true);
+                }
+            }
+            if (_speed2 != null)
+            {
+                if (!_speed2.activeInHierarchy && _CurrentMovementSpeed >= entitiesStats._MovementSpeedBase * 4)
+                {
+                    _speed2.SetActive(true);
+                    _robotFeet.SetActive(false);
+                }
+                else if (_speed2.activeInHierarchy && _CurrentMovementSpeed == entitiesStats._MovementSpeedBase)
+                {
+                    _speed2.SetActive(false);
+                    _robotFeet.SetActive(true);
+                }
+            }
+
+
+
+            if (_armor1 != null)
+            {
+                if (!_armor1.activeInHierarchy && shield == 1)
+                {
+                    _armor1.SetActive(true);
+                }
+                else if (_armor1.activeInHierarchy && shield != 1 && shield != 3)
+                {
+                    _armor1.SetActive(false);
+                }
+            }
+            if (_armor2 != null)
+            {
+                if (!_armor2.activeInHierarchy && shield == 2)
+                {
+                    _armor2.SetActive(true);
+                }
+                else if (_armor2.activeInHierarchy && shield != 2 && shield != 3)
+                {
+                    _armor2.SetActive(false);
+                }
+            }
+            if (_armor1 != null && _armor2 != null)
+            {
+                if (shield == 3)
+                {
+                    _armor1.SetActive(true);
+                    _armor2.SetActive(true);
+                }
+            }
+            if (_armor1 != null && _armor2 != null && _armor4 != null)
+            {
+                if (shield == 4)
+                {
+                    _armor1.SetActive(true);
+                    _armor2.SetActive(true);
+                    _armor4.SetActive(true);
+                }
+                else { _armor4.SetActive(false); }
+            }
+        }
+    }
+
     public void Jump()
     {
         jumpCount++;
@@ -279,7 +364,11 @@ public class Entity : MonoBehaviour
                 }
                 else
                 {
-                    Death();
+                    isMoving = true;
+                    Destroy(this.gameObject, 0.1f);
+                    Debug.Log("Victory ! You destroy Nexus.");
+                    if (UIManager.instance != null)
+                        UIManager.instance.StatePanelVictory(true);
                 }
             }
 
@@ -318,12 +407,12 @@ public class Entity : MonoBehaviour
                         _EnnemyEntities.Add(other.gameObject.GetComponent<Entity>());
                     }
                 }
-                else if(this.entitiesStats._Type == EntitiesStats.Type.Nexus)
-                {
-                    Debug.Log("Victory ! You destroy Nexus.");
-                    if (UIManager.instance != null)
-                        UIManager.instance.StatePanelVictory(true);
-                }
+                //else if(this.entitiesStats._Type == EntitiesStats.Type.Nexus)
+                //{
+                //    Debug.Log("Victory ! You destroy Nexus.");
+                //    if (UIManager.instance != null)
+                //        UIManager.instance.StatePanelVictory(true);
+                //}
             }
         }
     }
