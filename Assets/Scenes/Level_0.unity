@@ -319,6 +319,12 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   billboard: {fileID: 0}
   _prefabVFXDeath: {fileID: 0}
+  _armor1: {fileID: 0}
+  _armor2: {fileID: 0}
+  _armor4: {fileID: 0}
+  _robotFeet: {fileID: 0}
+  _speed1: {fileID: 0}
+  _speed2: {fileID: 0}
   canon: {fileID: 0}
 --- !u!54 &49345400
 Rigidbody:
@@ -2470,6 +2476,14 @@ PrefabInstance:
       propertyPath: _prefabVFXShieldOn
       value: 
       objectReference: {fileID: 106386, guid: 831c85159903ac84399ac3c3e1d5c5ad, type: 3}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: idNextScene
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: idScene
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1712732570202822920, guid: b293c60de28b8864a893c55a6ab0a2e0,
         type: 3}
       propertyPath: m_Name
