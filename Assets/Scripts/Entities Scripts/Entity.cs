@@ -33,8 +33,8 @@ public class Entity : MonoBehaviour
     private float _CurrentPos = 0;
     private int _CurrentObjectID = 0;
 
-    Vector3 _StartPosition;
-    Vector3 _CurrentNextPositionPath;
+    Vector3 lastPositionPath;
+    Vector3 nextPositionPath;
 
     [Header("Robot Bonus Bool")]
     [ReadOnly] public Bonus[] _BonusPlayer = new Bonus[4];
@@ -90,8 +90,13 @@ public class Entity : MonoBehaviour
             CheckPath();
 
         initScale = gameObject.transform.localScale;
-        if (_WalkingPath.Count!= 0)
-        _CurrentNextPositionPath = _WalkingPath[0].transform.position;
+        if (_WalkingPath.Count != 0)
+        {
+            lastPositionPath = _WalkingPath[0].transform.position;
+            nextPositionPath = _WalkingPath[1].transform.position;
+        }
+
+
     }
 
     // Update is called once per frame
@@ -336,13 +341,15 @@ public class Entity : MonoBehaviour
     void CheckPath()
     {
         _CurrentPos = 0;
-        _StartPosition = this.transform.position;
-        _CurrentNextPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
+        lastPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
+        nextPositionPath = _WalkingPath[_CurrentObjectID+1].transform.position;
 
-        Vector3 difference = _CurrentNextPositionPath - transform.position;
+        Vector3 difference = nextPositionPath - transform.position;
         difference.Normalize();
         float rotationY = Mathf.Atan2(difference.z, difference.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, rotationY, 0f);
+
+        _CurrentMovementSpeed = entitiesStats._MovementSpeedBase / Vector3.Distance(lastPositionPath, nextPositionPath);
     }
 
     void Movement()
@@ -351,44 +358,51 @@ public class Entity : MonoBehaviour
 
         if (_WalkingPath.Count != 0 && entitiesStats._Type == EntitiesStats.Type.Robot)
         {
-            transform.position += (_CurrentNextPositionPath - transform.position).normalized * _CurrentMovementSpeed * Time.deltaTime * 2;
+            /*
+            transform.position += (nextPositionPath - transform.position).normalized * _CurrentMovementSpeed * Time.deltaTime * 2;
 
-            if ((_CurrentNextPositionPath - transform.position).magnitude <= 0.1f)
+            if ((nextPositionPath - transform.position).magnitude <= 0.1f)
             {
                 _CurrentObjectID++;
                 if (_WalkingPath.Count > _CurrentObjectID)
                 {
                     //Debug.Log(_CurrentObjectID +"/"+ _WalkingPath.Count);
-                    _CurrentNextPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
-                    transform.forward = _CurrentNextPositionPath - transform.position;
+                    nextPositionPath = _WalkingPath[_CurrentObjectID].transform.position;
+                    transform.forward = nextPositionPath - transform.position;
                 }
                 else
                 {
                     isMoving = true;
-                    Destroy(this.gameObject, 0.1f);
                     Debug.Log("Victory ! You destroy Nexus.");
                     if (UIManager.instance != null)
                         UIManager.instance.StatePanelVictory(true);
+                    Destroy(this.gameObject, 0.1f);
                 }
-            }
+            }*/
 
-            /*
-            Debug.Log(_StartPosition +" ; "+  _CurrentNextPositionPath);
-            _CurrentPos += Time.deltaTime * _CurrentMovementSpeed / Vector3.Distance(_StartPosition, _CurrentNextPositionPath);
+            _CurrentPos += Time.deltaTime * _CurrentMovementSpeed;
 
-
-            this.transform.position = Vector3.Lerp(_StartPosition, _CurrentNextPositionPath, _AnimCurve.Evaluate(_CurrentPos));
+            this.transform.position = Vector3.Lerp(lastPositionPath, nextPositionPath, _AnimCurve.Evaluate(_CurrentPos));
             if (_CurrentPos >=1)
             {
                 _CurrentObjectID++;
+                if (_CurrentObjectID>= _WalkingPath.Count)
+                {
+                    isMoving = false;
+                    Debug.Log("Victory ! You destroy Nexus.");
+                    if (UIManager.instance != null)
+                        UIManager.instance.StatePanelVictory(true);
+                    Destroy(this.gameObject, 0.1f);
+                }
+                else
                 CheckPath();
-            }*/
+            }
         }
     }
 
     public void Death()
     {
-        isMoving = true;
+        isMoving = false;
         GameObject go = Instantiate(_prefabVFXDeath, this.transform.position, Quaternion.identity);
         Destroy(go, 0.5f);
         Destroy(this.gameObject, 0.1f);

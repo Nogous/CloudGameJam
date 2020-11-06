@@ -7,7 +7,6 @@ public class Bonus_Jump : Bonus
     protected override void Start()
     {
         base.Start();
-        ActiveBonus();
     }
 
     protected override void V_ActiveBonus()
