@@ -4465,6 +4465,14 @@ PrefabInstance:
       propertyPath: path.Array.data[9]
       value: 
       objectReference: {fileID: 785455782}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: idNextScene
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1875813266, guid: b293c60de28b8864a893c55a6ab0a2e0, type: 3}
+      propertyPath: idScene
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1712732570202822920, guid: b293c60de28b8864a893c55a6ab0a2e0,
         type: 3}
       propertyPath: m_Name
