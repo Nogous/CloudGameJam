@@ -407,7 +407,7 @@ public class GameManager : MonoBehaviour
 
             if (!playerChois[i])
             {
-                if (robots[robots.Length-1] != null) return;
+                if (robots[robots.Length - 1] != null) return;
 
                 if (players[i].GetButtonDown("X") && playerHands[i].card[0] != Card.None)
                 {
@@ -428,23 +428,35 @@ public class GameManager : MonoBehaviour
 
             if (players[i].GetButtonDown("ActiveRobot1") && robots[0] != null)
             {
-                robots[0]._BonusPlayer[i].ActiveBonus();
-                playerActivationImage[i].card0.color = new Color(155, 155, 155, 0.4f);
+                if (robots[0]._BonusPlayer[i] != null)
+                {
+                    robots[0]._BonusPlayer[i].ActiveBonus();
+                    playerActivationImage[i].card0.color = new Color(155, 155, 155, 0.4f);
+                }
             }
             if (players[i].GetButtonDown("ActiveRobot2") && robots[1] != null)
             {
-                robots[1]._BonusPlayer[i].ActiveBonus();
-                playerActivationImage[i].card1.color = new Color(155, 155, 155, 0.4f);
+                if (robots[0]._BonusPlayer[i] != null)
+                {
+                    robots[1]._BonusPlayer[i].ActiveBonus();
+                    playerActivationImage[i].card1.color = new Color(155, 155, 155, 0.4f);
+                }
             }
             if (players[i].GetButtonDown("ActiveRobot3") && robots[2] != null)
             {
-                robots[2]._BonusPlayer[i].ActiveBonus();
-                playerActivationImage[i].card2.color = new Color(155, 155, 155, 0.4f);
+                if (robots[0]._BonusPlayer[i] != null)
+                {
+                    robots[2]._BonusPlayer[i].ActiveBonus();
+                    playerActivationImage[i].card2.color = new Color(155, 155, 155, 0.4f);
+                }
             }
             if (players[i].GetButtonDown("ActiveRobot4") && robots[3] != null)
             {
-                robots[3]._BonusPlayer[i].ActiveBonus();
-                playerActivationImage[i].card3.color = new Color(155, 155, 155, 0.4f);
+                if (robots[0]._BonusPlayer[i] != null)
+                {
+                    robots[3]._BonusPlayer[i].ActiveBonus();
+                    playerActivationImage[i].card3.color = new Color(155, 155, 155, 0.4f);
+                }
             }
 
         }
