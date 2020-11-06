@@ -11,6 +11,10 @@ public class Tower : MonoBehaviour
     {
         if (entity._EnnemyEntities.Count>0)
         {
+            if (entity._EnnemyEntities[0] == null)
+            {
+                entity._EnnemyEntities.RemoveAt(0);
+            }else
             transform.forward = entity._EnnemyEntities[0].transform.position - transform.position;
         }
     }
