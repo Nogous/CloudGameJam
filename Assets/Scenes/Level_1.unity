@@ -322,6 +322,12 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   billboard: {fileID: 0}
   _prefabVFXDeath: {fileID: 0}
+  _armor1: {fileID: 0}
+  _armor2: {fileID: 0}
+  _armor4: {fileID: 0}
+  _robotFeet: {fileID: 0}
+  _speed1: {fileID: 0}
+  _speed2: {fileID: 0}
   canon: {fileID: 0}
 --- !u!54 &49345400
 Rigidbody:
@@ -3104,7 +3110,7 @@ PrefabInstance:
     - target: {fileID: 9061334892553222875, guid: 0023afac574ecaa47a14cea83798e2d1,
         type: 3}
       propertyPath: m_Radius
-      value: 5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9061334892553222875, guid: 0023afac574ecaa47a14cea83798e2d1,
         type: 3}
@@ -3410,6 +3416,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Giant ball
       objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455686, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6296129441920455689, guid: fd6b9b38008f32446b0b004f237148e9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3509,6 +3520,56 @@ PrefabInstance:
         type: 3}
       propertyPath: _TimeToReachTarget
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[0].outWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[1].inWeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6296129441920455690, guid: fd6b9b38008f32446b0b004f237148e9,
+        type: 3}
+      propertyPath: _AnimCurve.m_Curve.Array.data[1].value
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd6b9b38008f32446b0b004f237148e9, type: 3}
