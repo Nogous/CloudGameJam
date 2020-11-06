@@ -390,9 +390,6 @@ public class Entity : MonoBehaviour
                 {
                     isMoving = false;
                     Debug.Log("Victory ! You destroy Nexus.");
-                    if (UIManager.instance != null)
-                        UIManager.instance.StatePanelVictory(true);
-
 
                     SceneManager.LoadScene(GameManager.instance.idNextScene);
 
