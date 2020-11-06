@@ -130,6 +130,7 @@ public class Entity : MonoBehaviour
                 _CooldownHit = _CurrentAttackSpeed;
 
                 GameObject go = Instantiate(_BulletPrefab, canon.position, Quaternion.identity);
+                AudioManager.Instance.Play("Tourelle");
                 go.name = _BulletPrefab.name;
                 go.GetComponent<Bullet>().SetDefaultVariable(_CurrentDamage, _EnnemyEntities[0].gameObject, _CurrentAttackSpeed);
 
