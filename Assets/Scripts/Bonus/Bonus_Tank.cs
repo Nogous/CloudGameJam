@@ -11,7 +11,7 @@ public class Bonus_Tank : Bonus
     {
         base.V_ActiveBonus();
         myEntity.shield+=1;
-        _VFXShield = Instantiate(_prefabVFXShieldOn, myEntity.transform.parent);
+        _VFXShield = Instantiate(_prefabVFXShieldOn, myEntity.transform);
     }
 
     protected override void EndBonus()
