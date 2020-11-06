@@ -15,6 +15,7 @@ public class Stomper : MonoBehaviour
     private float cooldownRef;
     private Tween tween;
     public GameObject VFX;
+    public GameObject _prefabVFXHit;
 
     // Start is called before the first frame update
     void Start()
@@ -48,13 +49,13 @@ public class Stomper : MonoBehaviour
     {
         tween = this.transform.DOMoveY(_StartStompY, 1f)
         .OnComplete(() =>{
+            this.gameObject.GetComponent<BoxCollider>().enabled = true;
             tween = this.transform.DOMoveY(_EndStompY, 0.5f)
             .OnComplete(() => {
                 VFX.SetActive(true);
                 this.gameObject.GetComponent<BoxCollider>().enabled = false;
                 tween = this.transform.DOMoveY(_StartPositionY, 1.5f)
                 .OnComplete(() => {
-                    this.gameObject.GetComponent<BoxCollider>().enabled = true;
                     cooldown = cooldownRef;
                     startCooldown = true;
                     VFX.SetActive(false);
@@ -72,6 +73,8 @@ public class Stomper : MonoBehaviour
             if (_Entity.entitiesStats._Type == EntitiesStats.Type.Robot)
             {
                 collision.gameObject.GetComponent<Entity>().TakeDamage(_Damage, damageDealerType);
+                GameObject go = Instantiate(_prefabVFXHit, this.transform.position, Quaternion.identity);
+                Destroy(go, 0.5f);
             }
         }
     }
