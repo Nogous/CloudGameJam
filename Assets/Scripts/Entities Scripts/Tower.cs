@@ -5,6 +5,7 @@ using UnityEngine;
 public class Tower : MonoBehaviour
 {
     [SerializeField] private Entity entity;
+    [SerializeField] private GameObject objToMove;
 
     // Update is called once per frame
     void Update()
@@ -15,7 +16,7 @@ public class Tower : MonoBehaviour
             {
                 entity._EnnemyEntities.RemoveAt(0);
             }else
-            transform.forward = entity._EnnemyEntities[0].transform.position - transform.position;
+                objToMove.transform.forward = entity._EnnemyEntities[0].transform.position - transform.position;
         }
     }
 }
