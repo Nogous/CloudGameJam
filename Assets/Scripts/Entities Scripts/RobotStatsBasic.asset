@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Type: 2
   _HealthBase: 100
-  _MovementSpeedBase: 0.3
+  _MovementSpeedBase: 0.8
   _HitRangeBase: 0
   _AttackSpeedBase: 1
   _DamageBase: 1
