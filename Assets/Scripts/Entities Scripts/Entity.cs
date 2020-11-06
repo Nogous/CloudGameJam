@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Entity : MonoBehaviour
@@ -384,12 +385,16 @@ public class Entity : MonoBehaviour
             if (_CurrentPos >=1)
             {
                 _CurrentObjectID++;
-                if (_CurrentObjectID>= _WalkingPath.Count)
+                if (_CurrentObjectID>= _WalkingPath.Count-1)
                 {
                     isMoving = false;
                     Debug.Log("Victory ! You destroy Nexus.");
                     if (UIManager.instance != null)
                         UIManager.instance.StatePanelVictory(true);
+
+
+                    SceneManager.LoadScene(GameManager.instance.idNextScene);
+
                     Destroy(this.gameObject, 0.1f);
                 }
                 else
@@ -402,6 +407,7 @@ public class Entity : MonoBehaviour
     {
         isMoving = false;
         GameObject go = Instantiate(_prefabVFXDeath, this.transform.position, Quaternion.identity);
+        GameManager.instance.RobotDeath();
         Destroy(go, 0.5f);
         Destroy(this.gameObject, 0.1f);
     }
