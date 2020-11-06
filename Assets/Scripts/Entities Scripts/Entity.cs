@@ -314,8 +314,6 @@ public class Entity : MonoBehaviour
             {
                 Debug.Log("Damage Deal and get destroyed!");
                 this.health -= (int)(damage);
-                if (damageDealerObject != null)
-                    Destroy(damageDealerObject, 0.1f);
             }
             else
             {
