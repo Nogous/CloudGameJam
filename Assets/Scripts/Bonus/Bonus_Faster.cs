@@ -10,6 +10,7 @@ public class Bonus_Faster : Bonus
     {
         base.V_ActiveBonus();
         myEntity._CurrentMovementSpeed *= speedMultiplicator;
+        AudioManager.Instance.Play("Speed");
     }
 
     protected override void EndBonus()
