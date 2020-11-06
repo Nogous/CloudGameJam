@@ -356,6 +356,7 @@ public class GameManager : MonoBehaviour
                     tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Giant>();
                     break;
                 case Card.Jump:
+                    tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Jump>();
                     break;
                 case Card.Laser:
                     tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Mirror>();
