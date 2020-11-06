@@ -18,6 +18,18 @@ public class MainMenu : MonoBehaviour
         credit.SetActive(false);
     }
 
+    public void OnHoverEnter(Animator animator)
+    {
+        animator.SetBool("NeedUp", true);
+        animator.SetBool("NeedDown", false);
+    }
+
+    public void OnHoverExit(Animator animator)
+    {
+        animator.SetBool("NeedUp", false);
+        animator.SetBool("NeedDown", true);
+    }
+
     public void SetScreeActivate(GameObject screen)
     {
         titre.SetActive(false);
@@ -35,5 +47,15 @@ public class MainMenu : MonoBehaviour
     public void LoadScene(int id)
     {
         SceneManager.LoadScene(id);
+    }
+
+    public void Quit()
+    {
+        //Stop le jeu sur l'editeur quand on appelle la fonction
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        //Sinon quitte l'application si c'est une build
+        Application.Quit();
     }
 }

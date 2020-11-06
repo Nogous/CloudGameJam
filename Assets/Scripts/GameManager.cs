@@ -206,14 +206,10 @@ public class GameManager : MonoBehaviour
         {
             case Card.Shield:
                 return Resources.Load<Sprite>("Sprites/Armor");
-            case Card.Bomb:
-                return Resources.Load<Sprite>("Sprites/Bomb");
             case Card.Giant:
                 return Resources.Load<Sprite>("Sprites/Giant");
             case Card.Jump:
                 return Resources.Load<Sprite>("Sprites/Jump");
-            case Card.Laser:
-                return Resources.Load<Sprite>("Sprites/Laser");
             case Card.Speed:
                 return Resources.Load<Sprite>("Sprites/Speed");
             case Card.None:
@@ -356,16 +352,11 @@ public class GameManager : MonoBehaviour
                         bonus._prefabVFXShieldOn = _prefabVFXShieldOn;
                     }
                     break;
-                case Card.Bomb:
-                    break;
                 case Card.Giant:
                     tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Giant>();
                     break;
                 case Card.Jump:
                     tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Jump>();
-                    break;
-                case Card.Laser:
-                    tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Mirror>();
                     break;
                 case Card.Speed:
                     tmpRobot._BonusPlayer[i] = tmpRobot.gameObject.AddComponent<Bonus_Faster>();

@@ -51,11 +51,8 @@ public class Deck
                 case 3:
                     cards[i] = Card.Jump;
                     break;
-                case 4:
-                    cards[i] = Card.Laser;
-                    break;
-                case 5:
-                    cards[i] = Card.Bomb;
+                default:
+                    cards[i] = Card.Shield;
                     break;
             }
         }
