@@ -49,13 +49,16 @@ MonoBehaviour:
     volume: 1
     source: {fileID: 0}
     loop: 0
+    audioMixerGroup: {fileID: 24300002, guid: 30de8aa99bfb7f84ba60c0a4dba09cf3, type: 2}
   - name: Tourelle
     clip: {fileID: 8300000, guid: 8bb8bf0b5b60a164bbce1be3cfc78601, type: 3}
     volume: 0.05
     source: {fileID: 0}
     loop: 0
+    audioMixerGroup: {fileID: 24300002, guid: 30de8aa99bfb7f84ba60c0a4dba09cf3, type: 2}
   - name: Speed
     clip: {fileID: 8300000, guid: 0854be636e0912841ba152e3bbc0a9d7, type: 3}
     volume: 1
     source: {fileID: 0}
     loop: 0
+    audioMixerGroup: {fileID: 24300002, guid: 30de8aa99bfb7f84ba60c0a4dba09cf3, type: 2}

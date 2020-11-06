@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [System.Serializable]
 public class Sound
@@ -14,6 +15,8 @@ public class Sound
 
     [HideInInspector] public AudioSource source;
     public bool loop;
+
+    public AudioMixerGroup audioMixerGroup;
 }
 
 public class AudioManager : MonoBehaviour
@@ -36,6 +39,7 @@ public class AudioManager : MonoBehaviour
 
             s.source.volume = s.volume;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = s.audioMixerGroup;
         }
     }
 
