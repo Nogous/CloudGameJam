@@ -13,6 +13,7 @@ public class Bonus_Jump : Bonus
     {
         base.V_ActiveBonus();
         myEntity.Jump();
+        AudioManager.Instance.Play("Jump");
     }
 
     protected override void EndBonus()
