@@ -18,10 +18,10 @@ public class Bonus : MonoBehaviour
 
     protected Entity myEntity;
 
-    public float cooldown = 10f;
+    public float cooldown = 3f;
     [ReadOnly] [SerializeField] private float cooldownLogic;
 
-    public float bonusDuration = 10f;
+    public float bonusDuration = 3f;
     [ReadOnly] [SerializeField] private float bonusDurationLogic;
 
     #region virtual
